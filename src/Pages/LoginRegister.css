@@ -1,0 +1,53 @@
+.registerPage{
+    min-height: 100vh;
+    background-image: url(https://wallpaperaccess.com/full/1234718.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    overflow: auto;
+}
+
+.form-box{
+    border: solid 1px lightgoldenrodyellow;
+    border-radius: 7px;
+    box-shadow: 10px 10px 5px black;
+    background-color: rgba(35,35,35,.85);
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 50px 100px;
+}
+
+.form-box Form{
+    padding: 0 5%;
+}
+
+.credential-title{
+    color: white;
+    margin-bottom: 40px;
+}
+
+
+label{
+    color: white;
+}
+
+.credential-input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px lightgoldenrodyellow solid;
+    color: lightgoldenrodyellow;
+    text-align: center;
+    background-color: inherit;
+    font-size: 24px;
+}
+
+input:focus{
+    font-size: 24px;
+    border: none;
+    border-bottom: solid 1px lightgoldenrodyellow;
+    background-color: inherit;
+}
+
+.signin-submit-btn{
+   margin-top: 50px;
+}
