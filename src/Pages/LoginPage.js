@@ -8,7 +8,7 @@ function LoginPage()
     const [password, setPassword] = useState("");
 
     function submitHandler(e)
-    {
+    {   
         e.preventDefault();
         console.log(email);
         console.log(password);
@@ -25,11 +25,11 @@ function LoginPage()
 
                     <div className="credential-section">
                         <Form.Row className="justify-content-center">
-                            <input className="credential-input" type="text" onChange={(e) => setEmail(e.target.value)}/>
+                            <input className="credential-input" type="email" onChange={(e) => setEmail(e.target.value)}/>
                         </Form.Row>
                     
                         <Form.Row className="">
-                            <label>Email</label>
+                            <label className="credential-label">Email</label>
                         </Form.Row>
                     </div>
 
@@ -39,7 +39,7 @@ function LoginPage()
                         </Form.Row>
 
                         <Form.Row className="">                    
-                            <label>Password</label>
+                            <label className="credential-label">Password</label>
                         </Form.Row>
                     </div>
 

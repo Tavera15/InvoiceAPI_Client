@@ -27,11 +27,11 @@ function RegisterPage()
 
                     <div className="credential-section">
                         <Form.Row className="justify-content-center">
-                            <input className="credential-input" type="text" onChange={(e) => setEmail(e.target.value)}/>
+                            <input className="credential-input" type="email" onChange={(e) => setEmail(e.target.value)}/>
                         </Form.Row>
                     
                         <Form.Row className="">
-                            <label>Email</label>
+                            <label className="credential-label">Email</label>
                         </Form.Row>
                     </div>
 
@@ -41,7 +41,7 @@ function RegisterPage()
                         </Form.Row>
 
                         <Form.Row className="">                    
-                            <label>Password</label>
+                            <label className="credential-label">Password</label>
                         </Form.Row>
                     </div>
 
@@ -51,7 +51,7 @@ function RegisterPage()
                         </Form.Row>
                         
                         <Form.Row className="">                    
-                            <label>Confirm Password</label>
+                            <label className="credential-label">Confirm Password</label>
                         </Form.Row>
                     </div>
 

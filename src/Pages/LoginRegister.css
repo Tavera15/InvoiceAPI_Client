@@ -8,7 +8,7 @@
 }
 
 .form-box{
-    border: solid 1px lightgoldenrodyellow;
+    border: solid 4px black;
     border-radius: 7px;
     box-shadow: 10px 10px 5px black;
     background-color: rgba(35,35,35,.85);
@@ -27,7 +27,7 @@
 }
 
 
-label{
+.credential-label{
     color: white;
 }
 
@@ -41,7 +41,7 @@ label{
     font-size: 24px;
 }
 
-input:focus{
+.credential-input:focus{
     font-size: 24px;
     border: none;
     border-bottom: solid 1px lightgoldenrodyellow;

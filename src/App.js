@@ -4,6 +4,8 @@ import './App.css';
 import NavBar from './Components/NavBar.js';
 import LoginPage from './Pages/LoginPage.js';
 import RegisterPage from './Pages/RegisterPage.js';
+import CompanyManHome from "./Pages/CompanyManager/CompanyManHome.js"
+import CreateCompany from "./Pages/CompanyManager/CreateCompany.js";
 
 function App() {
   return (
@@ -18,6 +20,14 @@ function App() {
 
             <Route path="/Register">
               <RegisterPage />
+            </Route>
+
+            <Route exact path="/CompanyManager/">
+              <CompanyManHome />
+            </Route>
+            
+            <Route exact path="/CompanyManager/NewCompany">
+              <CreateCompany />
             </Route>
           
           </Switch>
