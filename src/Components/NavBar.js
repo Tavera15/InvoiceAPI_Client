@@ -27,8 +27,14 @@ function NavBar()
                             <a className="nav-link" href="/CompanyManager/NewCompany">New Company</a>
                         </div>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Pricing</a>
+                    <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Invoice
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a className="nav-link" href="/CompanyManager">Manager</a>
+                            <a className="nav-link" href="/InvoiceManager/NewInvoice">New Invoice</a>
+                        </div>
                     </li>
                     </ul>
                     <span className="navbar-text">

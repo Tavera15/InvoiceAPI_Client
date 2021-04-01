@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-function CompanyTable()
+function InvoiceTable()
 {
-    const [allCompanies, setAllCompanies] = useState([]);
-    const [companiesDisplayed, setCompaniesDisplayed] = useState([]);
-    const [inputCompanyText, setInputCompanyText] = useState("");
+    const [allInvoices, setAllInvoices] = useState([]);
+    const [invoicesDisplayed, setDisplayedInvoices] = useState([]);
+    const [companyInputText, setCompanyInputText] = useState("");
 
     useEffect(() => {
-        async function getCompanies()
+        async function getInvoices()
         {
-            const url = "https://localhost:44383/api/Company/GetCompanies";
+            const url = "https://localhost:44383/api/Invoice/GetInvoices";
             const token = "";
 
             const headers = {
@@ -18,23 +18,19 @@ function CompanyTable()
             };
 
             const res = await axios.get(url, {headers});
-            setAllCompanies(res.data);
+            setAllInvoices(res.data);
         }
         
-        getCompanies();
+        getInvoices();
     }, []);
 
     useEffect(() => {
-        const res = inputCompanyText !== "" 
-            ? allCompanies.filter((c) => c.companyName.toLowerCase().includes(inputCompanyText.toLowerCase()))
-            : allCompanies;
-
-            setCompaniesDisplayed(res)
-    }, [inputCompanyText, allCompanies])
+        setDisplayedInvoices(allInvoices);
+    }, [allInvoices])
 
     return(
         <div className="col-lg-8 col-sm-12" style={{"margin": "20px auto 0"}}>
-            <input onChange={(e) => setInputCompanyText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+            <input onChange={(e) => setCompanyInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
 
             <table className="table">
                 <thead className="thead-dark">
@@ -44,7 +40,7 @@ function CompanyTable()
                     </tr>
                 </thead>
                 <tbody>
-                    {companiesDisplayed.map((c, i) => 
+                    {invoicesDisplayed.map((c, i) => 
                         <tr key={i}>
                             <td>{c.companyName}</td>
                             <td>
@@ -59,4 +55,4 @@ function CompanyTable()
     )
 }
 
-export default CompanyTable;
+export default InvoiceTable;
