@@ -113,16 +113,16 @@ function CreateInvoice()
         <div className="col-lg-12">
             <h1>Create New Invoice</h1>
                 <Form onSubmit={(e) => submitHandle(e)}>
-                    <div className="row col-lg-12">
+                    <div className="row col-lg-12" style={{"margin": "0 auto"}}>
                         
                         <div className="col-lg-4 col-md-8">
                             <hr />
-
+                            <h3>Company Details</h3>
                             <select onChange={(e) => handleSelect(e)} className="form-select" aria-label="Default select example">
                                 <option hidden defaultValue>Select Company</option>
                                 {allCompanies.map((c, i) => 
                                     <option key={i} value={c.id}>{c.companyName}</option>
-                                    )}
+                                )}
                             </select>
                             
                             <div className="form-group">
@@ -162,7 +162,8 @@ function CreateInvoice()
                                 </div>
                             </div>
 
-                            <div style={{"border": "lightgrey 1px solid", "height": "2px", "backgroundColor": "grey", "margin": "40px 0"}}></div>
+                            <hr />
+                            <h3>Customer Details</h3>
 
                             <div className="form-group">
                                 <label htmlFor="inputCustomerName">Customer Name</label>
@@ -192,8 +193,9 @@ function CreateInvoice()
                             </div>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-3 col-md-8">
                             <hr />
+                            <h3>Product Details</h3>
                             <div className="add-product-section">
                                 <div className="form-group">
                                     <label>Product Name</label>
@@ -215,7 +217,11 @@ function CreateInvoice()
                                 </div>
                                 <Button onClick={(e) => addToProductsList(e)} type="button">Add New</Button>
                             </div>
+                        </div>
 
+                        <div className="col-lg-5 col-md-8">
+                            <hr />
+                            <h3>Invoice Details</h3>
                             <table className="table table-striped">
                                 <thead>
                                     <tr>

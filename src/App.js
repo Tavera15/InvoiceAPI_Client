@@ -7,6 +7,7 @@ import RegisterPage from './Pages/RegisterPage.js';
 import CompanyManHome from "./Pages/CompanyManager/CompanyManHome.js"
 import CreateCompany from "./Pages/CompanyManager/CreateCompany.js";
 import CreateInvoice from "./Pages/InvoiceManager/CreateInvoice";
+import ViewInvoice from "./Pages/InvoiceManager/ViewInvoice";
 
 function App() {
   return (
@@ -34,7 +35,11 @@ function App() {
             <Route exact path="/InvoiceManager/NewInvoice">
               <CreateInvoice />
             </Route>
-          
+
+            <Route exact path="/InvoiceManager/ViewInvoice">
+              <ViewInvoice />
+            </Route>
+
           </Switch>
         </Router>
       </div>
