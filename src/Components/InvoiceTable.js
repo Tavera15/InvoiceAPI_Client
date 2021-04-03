@@ -11,7 +11,6 @@ function InvoiceTable()
         async function getInvoices()
         {
             const url = "https://localhost:44383/api/Invoice/GetInvoices";
-            const token = "";
 
             const headers = {
                 'Authorization': `Bearer ${token}`
