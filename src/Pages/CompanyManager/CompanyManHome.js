@@ -1,7 +1,6 @@
 import React from 'react';
 import CompanyTable from '../../Components/CompanyTable.js'
 import InvoiceTable from '../../Components/InvoiceTable.js'
-import CreateCompany from './CreateCompany';
 
 function CompanyManHome()
 {
@@ -14,7 +13,7 @@ function CompanyManHome()
             </div>
             <div className="col-lg-7">
                 <h1>Invoice Manager</h1>
-                <a href="/CompanyManager/NewCompany" className="btn btn-primary">Create New</a>
+                <a href="/InvoiceManager/NewInvoice" className="btn btn-primary">Create New</a>
                 <InvoiceTable />
             </div>
         </div>

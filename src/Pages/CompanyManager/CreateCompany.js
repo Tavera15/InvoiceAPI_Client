@@ -40,7 +40,7 @@ function CreateCompany()
     }
 
     return(
-        <div className="col-lg-4 col-md-8 col-sm-12 creation-page">
+        <div className="col-xl-4 col-sm-8 creation-page">
             <h1>Create New Company</h1>
 
             <Form>

@@ -6,6 +6,7 @@ function CompanyTable()
     const [allCompanies, setAllCompanies] = useState([]);
     const [companiesDisplayed, setCompaniesDisplayed] = useState([]);
     const [inputCompanyText, setInputCompanyText] = useState("");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NWI3N2YwZC0xN2YyLTQxNzgtODZmOS00YTA2MGQ1Mzc5YzQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5uaWVAZXhhbXBsZS5jb20iLCJqdGkiOiJhNWU0NjIyOC04N2U0LTRhMTAtYjY0ZS1lM2Q0Yzg4OTJmNjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6Ijg1Yjc3ZjBkLTE3ZjItNDE3OC04NmY5LTRhMDYwZDUzNzljNCIsImV4cCI6MTYxODg4MzgzNiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM4MyJ9.f13mTxVbYNPyR3DAlb9MfO7wB_CBFtWxf7eXQ98V2sY";
 
     useEffect(() => {
         async function getCompanies()
@@ -45,10 +46,10 @@ function CompanyTable()
                 <tbody>
                     {companiesDisplayed.map((c, i) => 
                         <tr key={i}>
-                            <td>{c.companyName}</td>
+                            <td className="align-middle">{c.companyName}</td>
                             <td>
-                                <button className="btn">Edit</button>
-                                <button className="btn">Delete</button>
+                                <a href={"/CompanyManager/EditCompany/" + c.id} className="btn btn-default">Edit</a>
+                                <a href={"/CompanyManager/DeleteCompany/" + c.id} className="btn btn-default">Delete</a>
                             </td>
                         </tr>
                     )}
