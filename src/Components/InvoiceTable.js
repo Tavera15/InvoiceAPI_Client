@@ -45,7 +45,7 @@ function InvoiceTable()
                             <td className="align-middle">{c.companyName}</td>
                             <td>
                                 <a href={"/InvoiceManager/EditInvoice/" + c.id} className="btn">Edit</a>
-                                <a className="btn">Delete</a>
+                                <a href={"/InvoiceManager/DeleteInvoice/" + c.id} className="btn">Delete</a>
                             </td>
                         </tr>
                     )}

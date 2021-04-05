@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import './CompanyForms.css';
 
 function DeleteCompany()
 {

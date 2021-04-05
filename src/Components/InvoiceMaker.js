@@ -48,6 +48,7 @@ function InvoiceMaker(props)
             setCustomerZip(props.defaultInvoiceVals.customerZipCode);
             
             setProductsList(props.defaultInvoiceVals.productOrServices);
+            setTaxRate(props.defaultInvoiceVals.taxRate);
         }
 
     }, [props.defaultInvoiceVals])
@@ -83,7 +84,7 @@ function InvoiceMaker(props)
             setTaxAmount(newTaxAmount);
 
             // Grand Total
-            let newGrandTotal = subtotal + taxAmount;
+            let newGrandTotal = Math.ceil((subtotal + taxAmount) * 100) /100;
             setGrandTotal(newGrandTotal);
         }
 
@@ -161,7 +162,7 @@ function InvoiceMaker(props)
             "customerState": customerState,
             "customerZipCode": customerZip,
             "isFinalized": false,
-            "taxRate": 8.25,
+            "taxRate": taxRate,
             "products": productsList
         }
 
@@ -314,7 +315,7 @@ function InvoiceMaker(props)
                                 </tr>
                                 <tr>
                                     <td className="left">
-                                        <strong>Tax Rate <input onChange={(e) => setTaxRate(e.target.value)} type="number" min="0" id="inputTaxRate" /> %</strong>
+                                        <strong>Tax Rate <input onChange={(e) => setTaxRate(e.target.value)} value={taxRate || 0} type="number" min="0" id="inputTaxRate" /> %</strong>
                                     </td>
                                     <td className="right">${taxAmount.toFixed(2)}</td>
                                 </tr>

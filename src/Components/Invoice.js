@@ -1,5 +1,5 @@
 import React from 'react';
-import './InvoiceDoc.css';
+import './Styles/InvoiceDoc.css';
 
 const Invoice = React.forwardRef((props, ref) =>
 {

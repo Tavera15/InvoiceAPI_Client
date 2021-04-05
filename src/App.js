@@ -11,6 +11,7 @@ import CreateInvoice from "./Pages/InvoiceManager/CreateInvoice";
 import ViewInvoice from "./Pages/InvoiceManager/ViewInvoice";
 import DeleteCompany from "./Pages/CompanyManager/DeleteCompany";
 import EditInvoice from "./Pages/InvoiceManager/EditInvoice";
+import DeleteInvoice from "./Pages/InvoiceManager/DeleteInvoice";
 
 function App() {
   return (
@@ -53,6 +54,10 @@ function App() {
 
             <Route exact path="/InvoiceManager/EditInvoice/:id">
               <EditInvoice />
+            </Route>
+
+            <Route exact path="/InvoiceManager/DeleteInvoice/:id">
+              <DeleteInvoice />
             </Route>
 
           </Switch>
