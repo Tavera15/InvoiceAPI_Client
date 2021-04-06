@@ -3,6 +3,17 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom'
 import {Form, Button} from 'react-bootstrap';
+import 'tinymce/tinymce';
+import 'tinymce/icons/default';
+import 'tinymce/themes/silver';
+import 'tinymce/plugins/paste';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/table';
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/ui/oxide/content.min.css';
+import 'tinymce/skins/content/default/content.min.css';
+import { Editor } from '@tinymce/tinymce-react';
 
 function DeleteInvoice()
 {
@@ -165,7 +176,10 @@ function DeleteInvoice()
                                                             {targetInvoice.productOrServices.map((p, i) => 
                                                                 <tr key={i}>
                                                                     <td className="align-middle">{p.productName}</td>
-                                                                    <td className="align-middle">{p.description}</td>
+                                                                    <td className="align-middle">
+                                                                        <div dangerouslySetInnerHTML={{__html: p.description}}>
+                                                                        </div>
+                                                                    </td>
                                                                     <td className="align-middle">{p.unitPrice}</td>
                                                                     <td className="align-middle">{p.quantity}</td>
                                                                 </tr>

@@ -1,6 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
+import 'tinymce/tinymce';
+import 'tinymce/icons/default';
+import 'tinymce/themes/silver';
+import 'tinymce/plugins/paste';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/table';
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/ui/oxide/content.min.css';
+import 'tinymce/skins/content/default/content.min.css';
+import { Editor } from '@tinymce/tinymce-react';
 
 function InvoiceMaker(props)
 {
@@ -145,9 +156,10 @@ function InvoiceMaker(props)
         setProductsList([...productsList]);
     }
 
-    async function submitHandle(e)
+    async function submitHandle(e, isFinal)
     {
         e.preventDefault();
+
         const body = {
             "companyName": companyName,
             "addressLine1": companyAddressLine1,
@@ -163,7 +175,7 @@ function InvoiceMaker(props)
             "customerCity": customerCity,
             "customerState": customerState,
             "customerZipCode": customerZip,
-            "isFinalized": false,
+            "isFinalized": isFinal,
             "taxRate": taxRate,
             "products": productsList,
             "notes": notes
@@ -175,8 +187,19 @@ function InvoiceMaker(props)
     return(
         <div className="col-lg-12" style={{"margin": "0 auto"}}>
             <div className="col-xl-4 col-sm-8" style={{"margin": "0 auto"}}>      
-                <Form onSubmit={(e) => submitHandle(e)}>
+                <Form>
                     <div>
+                        <div className="col-lg-12">
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <Button type="submit" onClick={(e) => submitHandle(e, false)} className="btn btn-primary">Save draft</Button>
+                                </div>
+                                <div className="col-lg-6">
+                                    <Button type="submit" onClick={(e) => submitHandle(e, true)} className="btn btn-success">Create Invoice</Button>
+                                </div>
+                            </div>
+                        </div>
+
                         <hr />
                         <h3>Company Details</h3>
                         <select onChange={(e) => handleSelect(e)} className="form-select" aria-label="Default select example">
@@ -252,7 +275,6 @@ function InvoiceMaker(props)
                                 <input value={customerZip || ""} onChange={(e) => setCustomerZip(e.target.value)} type="text" className="form-control" id="inputCustomerZip" />
                             </div>
                         </div>
-                        <Button type="submit" className="btn btn-primary">Create</Button>
                     </div>
                 </Form>
                 <hr />
@@ -265,7 +287,24 @@ function InvoiceMaker(props)
                         </div>
                         <div className="form-group">
                             <label>Product Description</label>
-                            <textarea type="text" className="form-control" id="inputProductDesc" />
+                            <Editor
+                                id="inputProductDesc"
+                                init={{
+                                    skin: true,
+                                    content_css: true,
+                                    menubar: true,
+                                    height: 200,
+                                    plugins: [
+                                        'advlist autolink lists link charmap print preview anchor',
+                                        'searchreplace visualblocks code fullscreen',
+                                        'insertdatetime media table paste code help wordcount'
+                                    ],
+                                    toolbar: 'undo redo | formatselect | ' +
+                                        'bold italic backcolor | alignleft aligncenter ' +
+                                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                                        'removeformat | help',
+                                }}
+                            />
                         </div>
                         <div className="form-row">
                             <div className="form-group col-md-8">
@@ -294,10 +333,13 @@ function InvoiceMaker(props)
                                 {productsList.map((p, i) => 
                                     <tr key={i}>
                                         <td className="align-middle">{p.productName}</td>
-                                        <td className="align-middle">{p.description}</td>
+                                        <td className="align-middle">
+                                            <div dangerouslySetInnerHTML={{__html: p.description}}>
+                                            </div>
+                                        </td>
                                         <td className="align-middle">{p.unitPrice}</td>
                                         <td className="align-middle">{p.quantity}</td>
-                                        <td><button className="btn btn-danger" onClick={(e) => removeFromProductList(e, i)} type="button">Delete</button></td>
+                                        <td className="align-middle"><button className="btn btn-danger" onClick={(e) => removeFromProductList(e, i)} type="button">Delete</button></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -334,7 +376,26 @@ function InvoiceMaker(props)
                 </div>
                 <div className="form-group">
                     <label htmlFor="inputNotes">Notes</label>
-                    <textarea value={notes || ""} onChange={(e) => setNotes(e.target.value)} type="text" className="form-control" id="inputNotes" />
+                    <Editor
+                        onEditorChange={(content) => setNotes(content)}
+                        id="inputNotes"
+                        value={notes}
+                        init={{
+                            skin: true,
+                            content_css: true,
+                            menubar: true,
+                            height: 200,
+                            plugins: [
+                                'advlist autolink lists link charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar: 'undo redo | formatselect | ' +
+                                'bold italic backcolor | alignleft aligncenter ' +
+                                'alignright alignjustify | bullist numlist outdent indent | ' +
+                                'removeformat | help',
+                        }}
+                    />
                 </div>
             </div>
         </div>

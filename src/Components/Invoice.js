@@ -100,15 +100,15 @@ const Invoice = React.forwardRef((props, ref) =>
                                             <tr key={i}>
                                                 <td className="center">{i+1}</td>
                                                 <td className="left">{p.productName}</td>
-                                                <td className="left">{p.description}</td>
+                                                <td className="left">
+                                                    <div dangerouslySetInnerHTML={{__html: p.description}}>
+                                                    </div>
+                                                </td>
                                                 <td className="center">{p.quantity}</td>
                                                 <td className="right">${p.unitPrice.toFixed(2)}</td>
                                                 <td className="right">${(p.unitPrice * p.quantity).toFixed(2)}</td>
                                             </tr>
                                         )}
-                                        <tr>
-                                            
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -124,9 +124,10 @@ const Invoice = React.forwardRef((props, ref) =>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr className="">
-                                                    <td className="text-left">
-                                                        <div className="col-lg-12">{props.data.notes}</div>
+                                                <tr className="text-left">
+                                                    <td>
+                                                        <div dangerouslySetInnerHTML={{__html: props.data.notes}}>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
