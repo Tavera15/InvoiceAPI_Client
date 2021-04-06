@@ -9,3 +9,48 @@
 .lightgrey-border{
     border: solid 1px lightgrey;
 }
+
+.lightgrey-border-no-top{
+    border-top: none;
+    border-bottom: none;
+}
+
+.invoice-header-block{
+    padding: 0 !important;
+    width: calc(100%/3);
+}
+
+.invoice-footer-notes{
+    width: 70%;
+}
+
+.invoice-footer-calculations{
+    width: 30%;
+}
+
+@media (max-width: 768px){
+    .invoice-footer-notes{
+        width: 100%;
+    }
+    .invoice-footer-calculations{
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .invoice-header-block{
+        width: 100%;
+    }
+}
+
+@media print {
+    .invoice-header-block{
+        width: calc(100%/3);
+    }
+    .invoice-footer-notes{
+        width: 70%;
+    }
+    .invoice-footer-calculations{
+        width: 30%;
+    }
+}

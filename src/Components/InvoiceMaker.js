@@ -27,6 +27,7 @@ function InvoiceMaker(props)
     const [taxAmount, setTaxAmount] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
+    const [notes, setNotes] = useState("");
 
     useEffect(() => {
         if(props.defaultInvoiceVals !== undefined)
@@ -49,6 +50,7 @@ function InvoiceMaker(props)
             
             setProductsList(props.defaultInvoiceVals.productOrServices);
             setTaxRate(props.defaultInvoiceVals.taxRate);
+            setNotes(props.defaultInvoiceVals.notes);
         }
 
     }, [props.defaultInvoiceVals])
@@ -84,7 +86,7 @@ function InvoiceMaker(props)
             setTaxAmount(newTaxAmount);
 
             // Grand Total
-            let newGrandTotal = Math.ceil((subtotal + taxAmount) * 100) /100;
+            let newGrandTotal = Math.ceil((subtotal + taxAmount) * 100) / 100;
             setGrandTotal(newGrandTotal);
         }
 
@@ -163,7 +165,8 @@ function InvoiceMaker(props)
             "customerZipCode": customerZip,
             "isFinalized": false,
             "taxRate": taxRate,
-            "products": productsList
+            "products": productsList,
+            "notes": notes
         }
 
         props.handleSubmit(e, body);
@@ -171,166 +174,169 @@ function InvoiceMaker(props)
 
     return(
         <div className="col-lg-12" style={{"margin": "0 auto"}}>
-            <h1>{props.title}</h1>
-                <div className="col-xl-4 col-sm-8" style={{"margin": "0 auto"}}>      
-                    <Form onSubmit={(e) => submitHandle(e)}>
-                        <div>
-                            <hr />
-                            <h3>Company Details</h3>
-                            <select onChange={(e) => handleSelect(e)} className="form-select" aria-label="Default select example">
-                                <option hidden defaultValue>Select Company</option>
-                                {allCompanies.map((c, i) => 
-                                    <option key={i} value={c.id}>{c.companyName}</option>
-                                )}
-                            </select>
-                            
-                            <div className="form-group">
-                                <label htmlFor="inputName">Company Name</label>
-                                <input value={companyName || ""} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="inputEmail4">Email</label>
-                                    <input value={companyEmail || ""} onChange={(e) => setCompanyEmail(e.target.value)} type="email" className="form-control" id="inputEmail4" />
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="inputPhone4">Telephone</label>
-                                    <input value={companyPhone || ""} onChange={(e) => setCompanyPhone(e.target.value)} type="tel" className="form-control" id="inputPhone4" />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputAddress">Address Line 1</label>
-                                <input value={companyAddressLine1 || ""} onChange={(e) => setCompanyAdd1(e.target.value)} type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputAddress2">Address Line 2</label>
-                                <input value={companyAddressLine2 || ""} onChange={(e) => setCompanyAdd2(e.target.value)} type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="inputCity">City</label>
-                                    <input value={companyCity || ""} onChange={(e) => setCompanyCity(e.target.value)} type="text" className="form-control" id="inputCity" />
-                                </div>
-                                <div className="form-group col-md-8">
-                                    <label htmlFor="inputState">State</label>
-                                    <input value={companyState || ""} onChange={(e) => setCompanyState(e.target.value)} type="text" className="form-control" id="inputState" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="inputZip">Zip</label>
-                                    <input value={companyZip || ""} onChange={(e) => setCompanyZip(e.target.value)} type="text" className="form-control" id="inputZip" />
-                                </div>
-                            </div>
-
-                            <hr />
-                            <h3>Customer Details</h3>
-
-                            <div className="form-group">
-                                <label htmlFor="inputCustomerName">Customer Name</label>
-                                <input value={customerName || ""} onChange={(e) => setCustomerName(e.target.value)} type="text" className="form-control" id="inputCustomerName" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputCustomerAddress1">Customer Address Line 1</label>
-                                <input value={customerAddressLine1 || ""} onChange={(e) => setCustomerAdd1(e.target.value)} type="text" className="form-control" id="inputCustomerAddress1" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="inputCustomerAddress2">Customer Address Line 2</label>
-                                <input value={customerAddressLine2 || ""} onChange={(e) => setCustomerAdd2(e.target.value)} type="tel" className="form-control" id="inputCustomerAddress2" />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-12">
-                                    <label htmlFor="inputCustomerCity">Customer City</label>
-                                    <input value={customerCity || ""} onChange={(e) => setCustomerCity(e.target.value)} type="text" className="form-control" id="inputCustomerCity" />
-                                </div>
-                                <div className="form-group col-md-8">
-                                    <label htmlFor="inputCustomerState">Customer State</label>
-                                    <input value={customerState || ""} onChange={(e) => setCustomerState(e.target.value)} type="text" className="form-control" id="inputCustomerState" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="inputCustomerZip">Zip</label>
-                                    <input value={customerZip || ""} onChange={(e) => setCustomerZip(e.target.value)} type="text" className="form-control" id="inputCustomerZip" />
-                                </div>
-                            </div>
-                            <Button type="submit" className="btn btn-primary">Create</Button>
-                        </div>
-                    </Form>
-                    <hr />
-                    <h3>Product Details</h3>
-                    <Form onSubmit={(e) => addToProductsList(e)}>
-                        <div className="add-product-section">
-                            <div className="form-group">
-                                <label>Product Name</label>
-                                <input type="text" required className="form-control" id="inputProductName" />
-                            </div>
-                            <div className="form-group">
-                                <label>Product Description</label>
-                                <textarea type="text" className="form-control" id="inputProductDesc" />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-8">
-                                    <label>Unit Price</label>
-                                    <input required type="number" className="form-control" id="inputProductUnitPrice" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label>Quantity</label>
-                                    <input required type="number" defaultValue={1} className="form-control" min="1" id="inputProductQuantity" />
-                                </div>
-                            </div>
-                            <Button type="submit">Add New</Button>
-                            <hr />
-                            <h3>Invoice Details</h3>
-                            <table className="table table-striped table-responsive-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Unit Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {productsList.map((p, i) => 
-                                        <tr key={i}>
-                                            <td className="align-middle">{p.productName}</td>
-                                            <td className="align-middle">{p.description}</td>
-                                            <td className="align-middle">{p.unitPrice}</td>
-                                            <td className="align-middle">{p.quantity}</td>
-                                            <td><button className="btn btn-danger" onClick={(e) => removeFromProductList(e, i)} type="button">Delete</button></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Form>
+            <div className="col-xl-4 col-sm-8" style={{"margin": "0 auto"}}>      
+                <Form onSubmit={(e) => submitHandle(e)}>
                     <div>
-                        <hr/>
-                        <h3>Totals</h3>
-                        <table className="table table-clear text-left col-lg-12">
+                        <hr />
+                        <h3>Company Details</h3>
+                        <select onChange={(e) => handleSelect(e)} className="form-select" aria-label="Default select example">
+                            <option hidden defaultValue>Select Company</option>
+                            {allCompanies.map((c, i) => 
+                                <option key={i} value={c.id}>{c.companyName}</option>
+                            )}
+                        </select>
+                        
+                        <div className="form-group">
+                            <label htmlFor="inputName">Company Name</label>
+                            <input value={companyName || ""} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <label htmlFor="inputEmail4">Email</label>
+                                <input value={companyEmail || ""} onChange={(e) => setCompanyEmail(e.target.value)} type="email" className="form-control" id="inputEmail4" />
+                            </div>
+                            <div className="form-group col-md-6">
+                                <label htmlFor="inputPhone4">Telephone</label>
+                                <input value={companyPhone || ""} onChange={(e) => setCompanyPhone(e.target.value)} type="tel" className="form-control" id="inputPhone4" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputAddress">Address Line 1</label>
+                            <input value={companyAddressLine1 || ""} onChange={(e) => setCompanyAdd1(e.target.value)} type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputAddress2">Address Line 2</label>
+                            <input value={companyAddressLine2 || ""} onChange={(e) => setCompanyAdd2(e.target.value)} type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-12">
+                                <label htmlFor="inputCity">City</label>
+                                <input value={companyCity || ""} onChange={(e) => setCompanyCity(e.target.value)} type="text" className="form-control" id="inputCity" />
+                            </div>
+                            <div className="form-group col-md-8">
+                                <label htmlFor="inputState">State</label>
+                                <input value={companyState || ""} onChange={(e) => setCompanyState(e.target.value)} type="text" className="form-control" id="inputState" />
+                            </div>
+                            <div className="form-group col-md-4">
+                                <label htmlFor="inputZip">Zip</label>
+                                <input value={companyZip || ""} onChange={(e) => setCompanyZip(e.target.value)} type="text" className="form-control" id="inputZip" />
+                            </div>
+                        </div>
+
+                        <hr />
+                        <h3>Customer Details</h3>
+
+                        <div className="form-group">
+                            <label htmlFor="inputCustomerName">Customer Name</label>
+                            <input value={customerName || ""} onChange={(e) => setCustomerName(e.target.value)} type="text" className="form-control" id="inputCustomerName" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputCustomerAddress1">Customer Address Line 1</label>
+                            <input value={customerAddressLine1 || ""} onChange={(e) => setCustomerAdd1(e.target.value)} type="text" className="form-control" id="inputCustomerAddress1" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="inputCustomerAddress2">Customer Address Line 2</label>
+                            <input value={customerAddressLine2 || ""} onChange={(e) => setCustomerAdd2(e.target.value)} type="tel" className="form-control" id="inputCustomerAddress2" />
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-12">
+                                <label htmlFor="inputCustomerCity">Customer City</label>
+                                <input value={customerCity || ""} onChange={(e) => setCustomerCity(e.target.value)} type="text" className="form-control" id="inputCustomerCity" />
+                            </div>
+                            <div className="form-group col-md-8">
+                                <label htmlFor="inputCustomerState">Customer State</label>
+                                <input value={customerState || ""} onChange={(e) => setCustomerState(e.target.value)} type="text" className="form-control" id="inputCustomerState" />
+                            </div>
+                            <div className="form-group col-md-4">
+                                <label htmlFor="inputCustomerZip">Zip</label>
+                                <input value={customerZip || ""} onChange={(e) => setCustomerZip(e.target.value)} type="text" className="form-control" id="inputCustomerZip" />
+                            </div>
+                        </div>
+                        <Button type="submit" className="btn btn-primary">Create</Button>
+                    </div>
+                </Form>
+                <hr />
+                <h3>Product Details</h3>
+                <Form onSubmit={(e) => addToProductsList(e)}>
+                    <div className="add-product-section">
+                        <div className="form-group">
+                            <label>Product Name</label>
+                            <input type="text" required className="form-control" id="inputProductName" />
+                        </div>
+                        <div className="form-group">
+                            <label>Product Description</label>
+                            <textarea type="text" className="form-control" id="inputProductDesc" />
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-8">
+                                <label>Unit Price</label>
+                                <input required type="number" className="form-control" id="inputProductUnitPrice" />
+                            </div>
+                            <div className="form-group col-md-4">
+                                <label>Quantity</label>
+                                <input required type="number" defaultValue={1} className="form-control" min="1" id="inputProductQuantity" />
+                            </div>
+                        </div>
+                        <Button type="submit">Add New</Button>
+                        <hr />
+                        <h3>Invoice Details</h3>
+                        <table className="table table-striped table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <td className="left">
-                                        <strong>Subtotal</strong>
-                                    </td>
-                                    <td className="right">${subtotal.toFixed(2)}</td>
-                                </tr>
-                                <tr>
-                                    <td className="left">
-                                        <strong>Tax Rate <input onChange={(e) => setTaxRate(e.target.value)} value={taxRate || 0} type="number" min="0" id="inputTaxRate" /> %</strong>
-                                    </td>
-                                    <td className="right">${taxAmount.toFixed(2)}</td>
-                                </tr>
-                                <tr>
-                                    <td className="left">
-                                        <strong>Grand Total</strong>
-                                    </td>
-                                    <td className="right">
-                                        <strong>${grandTotal.toFixed(2)}</strong>
-                                    </td>
-                                </tr>
+                                {productsList.map((p, i) => 
+                                    <tr key={i}>
+                                        <td className="align-middle">{p.productName}</td>
+                                        <td className="align-middle">{p.description}</td>
+                                        <td className="align-middle">{p.unitPrice}</td>
+                                        <td className="align-middle">{p.quantity}</td>
+                                        <td><button className="btn btn-danger" onClick={(e) => removeFromProductList(e, i)} type="button">Delete</button></td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
+                </Form>
+                <div>
+                    <hr/>
+                    <h3>Totals</h3>
+                    <table className="table table-clear text-left col-lg-12">
+                        <tbody>
+                            <tr>
+                                <td className="left">
+                                    <strong>Subtotal</strong>
+                                </td>
+                                <td className="right">${subtotal.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td className="left">
+                                    <strong>Tax Rate <input onChange={(e) => setTaxRate(e.target.value)} value={taxRate || 0} type="number" min="0" id="inputTaxRate" /> %</strong>
+                                </td>
+                                <td className="right">${taxAmount.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td className="left">
+                                    <strong>Grand Total</strong>
+                                </td>
+                                <td className="right">
+                                    <strong>${grandTotal.toFixed(2)}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div className="form-group">
+                    <label htmlFor="inputNotes">Notes</label>
+                    <textarea value={notes || ""} onChange={(e) => setNotes(e.target.value)} type="text" className="form-control" id="inputNotes" />
+                </div>
+            </div>
         </div>
     );
 }

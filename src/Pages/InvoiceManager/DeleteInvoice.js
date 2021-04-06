@@ -39,10 +39,12 @@ function DeleteInvoice()
                 .catch((err) => {
                     setStatus(err.response.status);
                 })
+                .finally(() => {
+                    setIsLoaded(true);
+                })
         }
 
         getInvoice();
-        setIsLoaded(true);
     },[headers, params.id, history])
 
     async function handleSubmit(e)

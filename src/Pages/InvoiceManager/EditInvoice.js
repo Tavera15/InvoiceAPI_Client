@@ -23,6 +23,7 @@ function EditInvoice()
         async function getInvoice()
         {
             let isCancelled = false;
+
             const url = "https://localhost:44383/api/Invoice/GetInvoice/" + params.id;
             await axios.get(url, {headers})
             .then((res) => {
@@ -42,10 +43,12 @@ function EditInvoice()
             .catch((err) => {
                 setLoadStatus(err.response.status);
             })
+            .finally(() => {
+                setIsLoaded(true);
+            })
         }
         
         getInvoice();
-        setIsLoaded(true);
 
     }, [headers, params.id, loadStatus, history]);
 
@@ -71,8 +74,9 @@ function EditInvoice()
         <div>
             {isLoaded ?
                 <div>
+                    <h1>Edit Invoice</h1>
                     {loadStatus === 200 
-                        ? <InvoiceMaker handleSubmit={updateInvoice} defaultInvoiceVals={invoiceVals} token={token} title="Edit Invoice" />
+                        ? <InvoiceMaker handleSubmit={updateInvoice} defaultInvoiceVals={invoiceVals} token={token} />
                         : <div>404</div>
                     }
                 </div>

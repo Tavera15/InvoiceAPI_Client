@@ -12,51 +12,76 @@ const Invoice = React.forwardRef((props, ref) =>
                             <strong> #{props.data.id}</strong>
                         </div>
                         <div className="card-body">
-                            <div className="table-responsive">
-                                <table className="table mb-4" style={{"tableLayout": "fixed"}}>
-                                    <thead>
-                                        <tr>
-                                            <th className="text-center lightgrey-border">From</th>
-                                            <th className="text-center lightgrey-border">To</th>
-                                            <th className="text-center lightgrey-border">Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="text-left lightgrey-border">
-                                                <div className="col-sm-12">
-                                                    <div>
-                                                        <strong>{props.data.companyName}</strong>
-                                                    </div>
-                                                    <div>{props.data.addressLine1}</div>
-                                                    <div>{props.data.addressLine2}</div>
-                                                    <div>{props.data.city || "<City Missing>"}, {props.data.state || "<State Missing>"}, {props.data.zipCode || "<Zip Code Missing>"}</div>
-                                                    <div>{props.data.emailAddress || "<Email Missing>"}</div>
-                                                    <div>{props.data.phoneNumber || "<Telephone Missing>"}</div>
-                                                </div>
-                                            </td>
-                                            <td className="text-left lightgrey-border">
-                                                <div className="col-sm-12">
-                                                    <div>
-                                                        <strong>{props.data.customerName}</strong>
-                                                    </div>
-                                                    <div>{props.data.customerAddLine1}</div>
-                                                    <div>{props.data.customerAddLine2}</div>
-                                                    <div>{props.data.customerCity || "<City Missing>"}, {props.data.customerState || "<State Missing>"}, {props.data.customerZipCode || "<Zip Code Missing>"}</div>
-                                                </div>
-                                            </td>
-                                            <td className="text-left lightgrey-border">
-                                                <div className="col-sm-12">
-                                                    <div>Invoice:
-                                                        <strong> #{props.data.id}</strong>
-                                                    </div>
-                                                    <div>Date Created: April 30, 2019</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div className="col-lg-12 mb-4">
+                                <div className="row">
+                                    <div className="invoice-header-block lightgrey-border">
+                                       <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>From</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="text-left">
+                                                    <td>
+                                                        <div>
+                                                            <strong>{props.data.companyName}</strong>
+                                                        </div>
+                                                        <div>{props.data.addressLine1}</div>
+                                                        <div>{props.data.addressLine2}</div>
+                                                        <div>{props.data.city || "<City Missing>"}, {props.data.state || "<State Missing>"}, {props.data.zipCode || "<Zip Code Missing>"}</div>
+                                                        <div>{props.data.emailAddress || "<Email Missing>"}</div>
+                                                        <div>{props.data.phoneNumber || "<Telephone Missing>"}</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                    </div>
+                                    
+                                    <div className="invoice-header-block lightgrey-border">
+                                        <table className="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th>To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="text-left">
+                                                    <td>
+                                                        <div>
+                                                            <strong>{props.data.customerName}</strong>
+                                                        </div>
+                                                        <div>{props.data.customerAddLine1}</div>
+                                                        <div>{props.data.customerAddLine2}</div>
+                                                        <div>{props.data.customerCity || "<City Missing>"}, {props.data.customerState || "<State Missing>"}, {props.data.customerZipCode || "<Zip Code Missing>"}</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div className="invoice-header-block lightgrey-border">
+                                        <table className="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="text-left">
+                                                    <td>
+                                                        <div>Invoice:
+                                                            <strong> #{props.data.id}</strong>
+                                                        </div>
+                                                        <div>Date Created: April 30, 2019</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+                            
                                                           
                             <div className="table-responsive">
                                 <table className="table table-striped text-left">
@@ -71,75 +96,85 @@ const Invoice = React.forwardRef((props, ref) =>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {props.data.productOrServices.map((p, i) => 
+                                            <tr key={i}>
+                                                <td className="center">{i+1}</td>
+                                                <td className="left">{p.productName}</td>
+                                                <td className="left">{p.description}</td>
+                                                <td className="center">{p.quantity}</td>
+                                                <td className="right">${p.unitPrice.toFixed(2)}</td>
+                                                <td className="right">${(p.unitPrice * p.quantity).toFixed(2)}</td>
+                                            </tr>
+                                        )}
                                         <tr>
-                                            <td className="center">1</td>
-                                            <td className="left">Iphone 10</td>
-                                            <td className="left">Apple iphoe 10 with extended warranty</td>
-                                            <td className="center">16</td>
-                                            <td className="right">$999,00</td>
-                                            <td className="right">$999,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="center">2</td>
-                                            <td className="left">Samsung S6</td>
-                                            <td className="left">Samsung S6 with extended warranty</td>
-                                            <td className="center">20</td>
-                                            <td className="right">$150,00</td>
-                                            <td className="right">$3.000,00</td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="">
-                                <table className="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th style={{"width": "70%"}} className="lightgrey-border text-center">Notes</th>
-                                            <th style={{"width": "30%"}} className="lightgrey-border text-center"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="text-left">
-                                                <div className="col-lg-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div>
-                                            </td>
-                                            <td className="lightgrey-border">
-                                                <div className="col-lg-12 col-auto"> 
-                                                    <table className="table table-clear text-left col-lg-12">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td className="left">
-                                                                    <strong>Subtotal</strong>
-                                                                </td>
-                                                                <td className="right">$8.497,00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td className="left">
-                                                                    <strong>Discount (20%)</strong>
-                                                                </td>
-                                                                <td className="right">$1,699,40</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td className="left">
-                                                                    <strong>VAT (10%)</strong>
-                                                                </td>
-                                                                <td className="right">$679,76</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td className="left">
-                                                                    <strong>Total</strong>
-                                                                </td>
-                                                                <td className="right">
-                                                                    <strong>$7.477,36</strong>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            
+                            <div className="col-lg-12">
+                                <div className="row">
+
+                                    <div className="invoice-footer-notes mb-4">
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th className="lightgrey-border text-center">Notes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="">
+                                                    <td className="text-left">
+                                                        <div className="col-lg-12">{props.data.notes}</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div className="invoice-footer-calculations mb-4">
+                                        <table className="table table-fixed">
+                                            <thead>
+                                                <tr>
+                                                    <th className="lightgrey-border text-center">Calculations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="lightgrey-border">
+                                                    <td className="lightgrey-border">
+                                                        <div className=""> 
+                                                            <table className="table table-clear text-left">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td className="left">
+                                                                            <strong>Subtotal</strong>
+                                                                        </td>
+                                                                        <td className="right">${props.data.subtotal}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td className="left">
+                                                                            <strong>Tax Rate ({props.data.taxRate}%)</strong>
+                                                                        </td>
+                                                                        <td className="right">${props.data.taxAmount || 0}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td className="left">
+                                                                            <strong>Grand Total</strong>
+                                                                        </td>
+                                                                        <td className="right">
+                                                                            <strong>${props.data.total}</strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

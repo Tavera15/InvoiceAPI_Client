@@ -30,7 +30,10 @@ function CreateInvoice()
     }
 
     return(
-        <InvoiceMaker handleSubmit={createNewInvoice} token={token} title="Create Invoice" />
+        <div>
+            <h1>Create Invoice</h1>
+            <InvoiceMaker handleSubmit={createNewInvoice} token={token} />
+        </div>
     );
 }
 
