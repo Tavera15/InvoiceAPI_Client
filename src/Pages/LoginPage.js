@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Button, Form } from 'react-bootstrap';
+import axios from 'axios';
 import "./LoginRegister.css"
 
 function LoginPage()
@@ -7,11 +8,18 @@ function LoginPage()
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
 
-    function submitHandler(e)
+    async function submitHandler(e)
     {   
         e.preventDefault();
-        console.log(email);
-        console.log(password);
+
+        const url = "https://localhost:44383/api/Account/Login";
+        await axios.post(url, {"email": email, "password": password}, {withCredentials: true})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err.response);
+        })
     }
 
     return(

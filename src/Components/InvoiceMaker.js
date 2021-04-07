@@ -69,18 +69,14 @@ function InvoiceMaker(props)
     useEffect(() => {
         async function getCompanies()
         {
-            const url = "https://localhost:44383/api/Company/GetCompanies";
-            
-            const headers = {
-                'Authorization': `Bearer ${props.token}`
-            };
-            
-            const res = await axios.get(url, {headers});
+            const url = "https://localhost:44383/api/Company/GetCompanies";      
+            const res = await axios.get(url, {withCredentials: true});
+
             setAllCompanies(res.data);
         }
         
         getCompanies();
-    }, [props.token]);
+    }, []);
 
     useEffect(() => {
         function calcultateGrandTotal()

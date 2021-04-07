@@ -29,9 +29,13 @@ const Invoice = React.forwardRef((props, ref) =>
                                                         </div>
                                                         <div>{props.data.addressLine1}</div>
                                                         <div>{props.data.addressLine2}</div>
-                                                        <div>{props.data.city || "<City Missing>"}, {props.data.state || "<State Missing>"}, {props.data.zipCode || "<Zip Code Missing>"}</div>
-                                                        <div>{props.data.emailAddress || "<Email Missing>"}</div>
-                                                        <div>{props.data.phoneNumber || "<Telephone Missing>"}</div>
+                                                        <div>
+                                                            {props.data.city !== "" ? props.data.city + ", " : ""}
+                                                            {props.data.state !== "" ? props.data.state + ", " : ""}
+                                                            {props.data.zipCode}
+                                                        </div>
+                                                        <div>{props.data.emailAddress}</div>
+                                                        <div>{props.data.phoneNumber}</div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -53,7 +57,11 @@ const Invoice = React.forwardRef((props, ref) =>
                                                         </div>
                                                         <div>{props.data.customerAddLine1}</div>
                                                         <div>{props.data.customerAddLine2}</div>
-                                                        <div>{props.data.customerCity || "<City Missing>"}, {props.data.customerState || "<State Missing>"}, {props.data.customerZipCode || "<Zip Code Missing>"}</div>
+                                                        <div>
+                                                            {props.data.customerCity !== "" ? props.data.customerCity + ", " : ""}
+                                                            {props.data.customerState !== "" ? props.data.customerState + ", " : ""}
+                                                            {props.data.customerZipCode}
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -157,7 +165,7 @@ const Invoice = React.forwardRef((props, ref) =>
                                                                         <td className="left">
                                                                             <strong>Tax Rate ({props.data.taxRate}%)</strong>
                                                                         </td>
-                                                                        <td className="right">${props.data.taxAmount || 0}</td>
+                                                                        <td className="right">${props.data.taxes || 0}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td className="left">

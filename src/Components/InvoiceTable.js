@@ -5,19 +5,14 @@ function InvoiceTable()
 {
     const [allInvoices, setAllInvoices] = useState([]);
     const [invoicesDisplayed, setDisplayedInvoices] = useState([]);
-    const [companyInputText, setCompanyInputText] = useState("");
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NWI3N2YwZC0xN2YyLTQxNzgtODZmOS00YTA2MGQ1Mzc5YzQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5uaWVAZXhhbXBsZS5jb20iLCJqdGkiOiJhNWU0NjIyOC04N2U0LTRhMTAtYjY0ZS1lM2Q0Yzg4OTJmNjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6Ijg1Yjc3ZjBkLTE3ZjItNDE3OC04NmY5LTRhMDYwZDUzNzljNCIsImV4cCI6MTYxODg4MzgzNiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODMiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM4MyJ9.f13mTxVbYNPyR3DAlb9MfO7wB_CBFtWxf7eXQ98V2sY";
+    const [invoiceInputText, setInvoiceInputText] = useState("");
 
     useEffect(() => {
         async function getInvoices()
         {
             const url = "https://localhost:44383/api/Invoice/GetInvoices";
+            const res = await axios.get(url, {withCredentials: true});
 
-            const headers = {
-                'Authorization': `Bearer ${token}`
-            };
-
-            const res = await axios.get(url, {headers});
             setAllInvoices(res.data);
         }
         
@@ -28,9 +23,22 @@ function InvoiceTable()
         setDisplayedInvoices(allInvoices);
     }, [allInvoices])
 
+    useEffect(() => {
+        const res = invoiceInputText !== "" 
+            ? allInvoices
+                .filter((c) => 
+                    c.id.includes(invoiceInputText)
+                    || c.companyName.toLowerCase().includes(invoiceInputText.toLowerCase()
+                    || c.customerName.toLowerCase().includes(invoiceInputText.toLowerCase())))
+            : allInvoices;
+
+        setDisplayedInvoices(res)
+
+    }, [invoiceInputText, allInvoices])
+
     return(
         <div className="col-lg-8 col-sm-12" style={{"margin": "20px auto 0"}}>
-            <input onChange={(e) => setCompanyInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+            <input onChange={(e) => setInvoiceInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
 
             <table className="table">
                 <thead className="thead-dark">
