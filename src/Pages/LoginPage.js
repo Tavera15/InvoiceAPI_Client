@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+import {useDispatch} from 'react-redux'
+import { userAuthentication } from '../App/AuthSlicer';
 import "./LoginRegister.css"
 
 function LoginPage()
 {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
 
@@ -14,12 +17,9 @@ function LoginPage()
 
         const url = "https://localhost:44383/api/Account/Login";
         await axios.post(url, {"email": email, "password": password}, {withCredentials: true})
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err.response);
-        })
+            .then((res) => {
+                dispatch(userAuthentication(res.data))
+            })
     }
 
     return(

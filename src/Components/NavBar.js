@@ -1,8 +1,25 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {useDispatch} from 'react-redux'
+import { userAuthentication } from '../App/AuthSlicer';
+import { Button } from "react-bootstrap";
 
 function NavBar()
 {
+    const dispatch = useDispatch();
+
+    async function handleLogout(e)
+    {
+        e.preventDefault();
+
+        const url = "https://localhost:44383/api/Account/Logout"
+        await axios.post(url,{},{withCredentials: true})
+            .then((res) => {
+                dispatch(userAuthentication(res.data))
+            })
+    }
+
     return(
         
         <div>
@@ -41,6 +58,7 @@ function NavBar()
                         <ul className="navbar-nav mr-auto">
                             <Link to="/Login" className="nav-link">Login</Link>
                             <Link to="/Register" className="nav-link">Register</Link>
+                            <Button type="button" className="nav-link" onClick={(e) => handleLogout(e)}>Logout</Button>
                         </ul>
                     </span>
                 </div>

@@ -11,9 +11,10 @@ function InvoiceTable()
         async function getInvoices()
         {
             const url = "https://localhost:44383/api/Invoice/GetInvoices";
-            const res = await axios.get(url, {withCredentials: true});
-
-            setAllInvoices(res.data);
+            await axios.get(url, {withCredentials: true})
+            .then((res) => {
+                setAllInvoices(res.data);
+            })
         }
         
         getInvoices();

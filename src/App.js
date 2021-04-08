@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import NavBar from './Components/NavBar.js';
 import LoginPage from './Pages/LoginPage.js';
@@ -12,58 +13,67 @@ import ViewInvoice from "./Pages/InvoiceManager/ViewInvoice";
 import DeleteCompany from "./Pages/CompanyManager/DeleteCompany";
 import EditInvoice from "./Pages/InvoiceManager/EditInvoice";
 import DeleteInvoice from "./Pages/InvoiceManager/DeleteInvoice";
+import { useDispatch } from 'react-redux';
+import { userAuthentication } from './App/AuthSlicer';
+import PrivateRoute from "./Components/PrivateRoute";
 
-function App() {
-  return (
-      <div className="App">
-        <Router>
-          <NavBar />
-          <Switch>
-          
-            <Route path="/Login">
-              <LoginPage />
-            </Route>
+function App() 
+{
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-            <Route path="/Register">
-              <RegisterPage />
-            </Route>
+  useEffect(() => {
+      async function getUserStatus()
+      {
+          const url = "https://localhost:44383/api/Account/IsUserLoggedIn";
+          await axios.get(url, {withCredentials: true})
+            .then((res) => {
+              if(res.data.email !== "")
+                dispatch(userAuthentication(res.data))
+            })
+            .finally(() => {
+              setIsLoading(false)
+            })
+      }
 
-            <Route exact path="/CompanyManager/">
-              <CompanyManHome />
-            </Route>
-            
-            <Route exact path="/CompanyManager/NewCompany">
-              <CreateCompany />
-            </Route>
+      getUserStatus();
+  }, [dispatch])
 
-            <Route exact path="/CompanyManager/EditCompany/:id">
-              <EditCompany />
-            </Route>
+  if(isLoading)
+  {
+    return <div>Loading...</div>
+  }
+  else
+  {
+    return (
+        <div className="App">
+          <Router>
+            <NavBar />
+            <Switch>
+              <Route path="/Login">
+                <LoginPage />
+              </Route>
 
-            <Route exact path="/CompanyManager/DeleteCompany/:id">
-              <DeleteCompany />
-            </Route>
+              <Route path="/Register">
+                <RegisterPage />
+              </Route>
 
-            <Route exact path="/InvoiceManager/NewInvoice">
-              <CreateInvoice />
-            </Route>
+                <PrivateRoute Comp={<CreateCompany />} path="/CompanyManager/NewCompany/"/>
+                <PrivateRoute Comp={<EditCompany />} path="/CompanyManager/EditCompany/:id"/>
+                <PrivateRoute Comp={<DeleteCompany />} path="/CompanyManager/DeleteCompany/:id"/>
+                <PrivateRoute Comp={<CompanyManHome />} path="/CompanyManager/"/>
 
-            <Route exact path="/InvoiceManager/ViewInvoice/:id">
-              <ViewInvoice />
-            </Route>
+                <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
+                <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
+                <PrivateRoute Comp={<EditInvoice />} path="/InvoiceManager/EditInvoice/:id"/>
+                <PrivateRoute Comp={<DeleteInvoice />} path="/InvoiceManager/DeleteInvoice/:id"/>
 
-            <Route exact path="/InvoiceManager/EditInvoice/:id">
-              <EditInvoice />
-            </Route>
+            </Switch>
+          </Router>
+        </div>
+    );
+  }
 
-            <Route exact path="/InvoiceManager/DeleteInvoice/:id">
-              <DeleteInvoice />
-            </Route>
-
-          </Switch>
-        </Router>
-      </div>
-  );
 }
 
 export default App;
