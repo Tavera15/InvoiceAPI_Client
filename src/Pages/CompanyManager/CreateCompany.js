@@ -16,14 +16,14 @@ function CreateCompany()
             .then((res) => {
                 if(res.status === 201)
                 {
-                    history.push("/CompanyManager");
+                    history.push("/Profile");
                 }
             })
     }
 
     return(
         <div>
-            <CompanyMaker handleSubmit={createNewCompany} />
+            <CompanyMaker handleSave={createNewCompany} cmd="Create" />
         </div>
     );
 }

@@ -5,17 +5,15 @@ import './App.css';
 import NavBar from './Components/NavBar.js';
 import LoginPage from './Pages/LoginPage.js';
 import RegisterPage from './Pages/RegisterPage.js';
-import CompanyManHome from "./Pages/CompanyManager/CompanyManHome.js"
+import ProfilePage from "./Pages/ProfilePage.js"
 import CreateCompany from "./Pages/CompanyManager/CreateCompany.js";
-import EditCompany from "./Pages/CompanyManager/EditCompany.js";
+import ViewCompany from "./Pages/CompanyManager/ViewCompany.js";
 import CreateInvoice from "./Pages/InvoiceManager/CreateInvoice";
 import ViewInvoice from "./Pages/InvoiceManager/ViewInvoice";
-import DeleteCompany from "./Pages/CompanyManager/DeleteCompany";
-import EditInvoice from "./Pages/InvoiceManager/EditInvoice";
-import DeleteInvoice from "./Pages/InvoiceManager/DeleteInvoice";
 import { useDispatch } from 'react-redux';
 import { userAuthentication } from './App/AuthSlicer';
 import PrivateRoute from "./Components/PrivateRoute";
+import HomePage from "./Pages/HomePage";
 
 function App() 
 {
@@ -50,23 +48,25 @@ function App()
           <Router>
             <NavBar />
             <Switch>
-              <Route path="/Login">
-                <LoginPage />
-              </Route>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
 
-              <Route path="/Register">
-                <RegisterPage />
-              </Route>
+                <Route exact path="/Login">
+                  <LoginPage />
+                </Route>
+
+                <Route exact path="/Register">
+                  <RegisterPage />
+                </Route>
+
+                <PrivateRoute Comp={<ProfilePage />} path="/Profile/"/>
 
                 <PrivateRoute Comp={<CreateCompany />} path="/CompanyManager/NewCompany/"/>
-                <PrivateRoute Comp={<EditCompany />} path="/CompanyManager/EditCompany/:id"/>
-                <PrivateRoute Comp={<DeleteCompany />} path="/CompanyManager/DeleteCompany/:id"/>
-                <PrivateRoute Comp={<CompanyManHome />} path="/CompanyManager/"/>
+                <PrivateRoute Comp={<ViewCompany />} path="/CompanyManager/ViewCompany/:id"/>
 
                 <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
                 <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
-                <PrivateRoute Comp={<EditInvoice />} path="/InvoiceManager/EditInvoice/:id"/>
-                <PrivateRoute Comp={<DeleteInvoice />} path="/InvoiceManager/DeleteInvoice/:id"/>
 
             </Switch>
           </Router>

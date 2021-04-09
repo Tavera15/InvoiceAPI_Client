@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+import { Button, Form } from 'react-bootstrap';
 import {useDispatch} from 'react-redux'
 import { userAuthentication } from '../App/AuthSlicer';
+import { useHistory } from 'react-router-dom'
 import "./LoginRegister.css"
 
 function LoginPage()
 {
     const dispatch = useDispatch();
+    const history = useHistory();
+    
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
 
@@ -19,6 +22,7 @@ function LoginPage()
         await axios.post(url, {"email": email, "password": password}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
+                history.push("/Profile")
             })
     }
 

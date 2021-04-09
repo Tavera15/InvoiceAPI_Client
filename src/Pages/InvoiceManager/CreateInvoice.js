@@ -17,7 +17,7 @@ function CreateInvoice()
         .then((res) => {
             if(res.status === 201)
             {
-                history.push("/CompanyManager")
+                history.push("/Profile")
             }
         })
         .catch((err) => {
@@ -27,8 +27,7 @@ function CreateInvoice()
 
     return(
         <div>
-            <h1>Create Invoice</h1>
-            <InvoiceMaker handleSubmit={createNewInvoice} />
+            <InvoiceMaker cmd="Create" handleSave={createNewInvoice} />
         </div>
     );
 }

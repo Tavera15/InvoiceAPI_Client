@@ -1,6 +1,34 @@
 .creation-page{
-    min-height: 100vh;
-    background-color: white;
+    background-color: rgba(30,30,30,.85);
     overflow: auto;
-    margin: 0 auto;
+    margin: 5% auto;
+    padding: 20px 0 20px;
+    border: black 4px solid;
+    box-shadow: 10px 10px 5px black;
+    border-radius: 7px;
+}
+
+.view-invoice{
+    background-color: rgba(30,30,30,.85);
+    padding: 3% 0;
+    min-height: 100vh;
+}
+
+.form-name{
+    color: white;
+}
+
+.creation-page label{
+    color: white;
+}
+
+.creation-page .form-group input, .tax-rate-input{
+    background-color: inherit;
+    color: white;
+}
+
+.select-block{
+    margin: 20px 0;
+    padding: 0 !important;
+    text-align: left;
 }

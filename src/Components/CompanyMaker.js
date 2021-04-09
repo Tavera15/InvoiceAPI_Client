@@ -33,7 +33,7 @@ function CompanyMaker(props)
         getCompany();
     },[props.defaultCompanyVals]);
 
-    function handleSubmit(e)
+    function handleSave(e)
     {
         e.preventDefault();
 
@@ -48,15 +48,19 @@ function CompanyMaker(props)
             "phoneNumber": companyPhone
         };
 
-        props.handleSubmit(e, body);
+        props.handleSave(e, body);
     }
 
+    const btn_class = props.handleDelete !== undefined
+        ? "col-6"
+        : "col-12"
+    
     return(
 
         <div className="col-lg-4 col-md-8 col-sm-12 creation-page">
-            <h1>Edit Company</h1>
-
-            <Form onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="form-name">{props.cmd} Company</h1>
+            <hr />
+            <Form>
                 <div className="form-group">
                     <label htmlFor="inputName">Company Name</label>
                     <input value={companyName} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
@@ -93,7 +97,21 @@ function CompanyMaker(props)
                         <input value={companyZip} onChange={(e) => setCompanyZip(e.target.value)} type="text" className="form-control" id="inputZip" />
                     </div>
                 </div>
-                <Button type="submit" className="btn btn-success">Save</Button>
+                <div className="col-lg-12">
+                    <div className="row">
+                        <div className={btn_class}>
+                            <Button onClick={handleSave} type="button" className="btn btn-success col-12">Save</Button>
+                        </div>
+
+                        {
+                            props.handleDelete !== undefined 
+                            ?   <div className={btn_class}>
+                                        <Button onClick={(e) => props.handleDelete(e)} type="button" className="btn btn-danger col-12">Delete</Button>
+                                    </div>
+                                : <div></div>
+                            }
+                    </div>
+                </div>
             </Form>
         </div>
     )

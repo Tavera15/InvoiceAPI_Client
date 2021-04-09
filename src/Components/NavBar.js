@@ -4,10 +4,13 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux'
 import { userAuthentication } from '../App/AuthSlicer';
 import { Button } from "react-bootstrap";
+import { useSelector } from 'react-redux';
 
 function NavBar()
 {
     const dispatch = useDispatch();
+    const {isLoggedIn} = useSelector(state => state.AuthSlice);
+    const {userEmail} = useSelector(state => state.AuthSlice);
 
     async function handleLogout(e)
     {
@@ -32,33 +35,38 @@ function NavBar()
                 <div className="collapse navbar-collapse" id="navbarText">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+                        <a className="nav-link" href="/Profile">Home<span className="sr-only">(current)</span></a>
                     </li>
 
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Company
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="nav-link" href="/CompanyManager">Manager</a>
-                            <a className="nav-link" href="/CompanyManager/NewCompany">New Company</a>
-                        </div>
-                    </li>
-                    <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Invoice
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="nav-link" href="/CompanyManager">Manager</a>
-                            <a className="nav-link" href="/InvoiceManager/NewInvoice">New Invoice</a>
-                        </div>
-                    </li>
+                    {
+                        isLoggedIn
+                        ? <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Manager
+                            </a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a className="nav-link" href="/CompanyManager/NewCompany">New Company</a>
+                                <a className="nav-link" href="/InvoiceManager/NewInvoice">New Invoice</a>
+                            </div>
+                          </li>
+                        : <div></div>
+                    }
+
+                    
                     </ul>
                     <span className="navbar-text">
                         <ul className="navbar-nav mr-auto">
-                            <Link to="/Login" className="nav-link">Login</Link>
-                            <Link to="/Register" className="nav-link">Register</Link>
-                            <Button type="button" className="nav-link" onClick={(e) => handleLogout(e)}>Logout</Button>
+                            {
+                                !isLoggedIn
+                                ? <div>
+                                      <Link to="/Login" className="btn btn-light">Login</Link>
+                                      <Link to="/Register" className="btn btn-light">Register</Link>
+                                  </div>
+                                : <div>
+                                      <a className="btn btn-light" href="/Profile">{userEmail}</a>
+                                      <Button type="button" className="btn btn-light" onClick={(e) => handleLogout(e)}>Logout</Button>
+                                  </div> 
+                            }
                         </ul>
                     </span>
                 </div>

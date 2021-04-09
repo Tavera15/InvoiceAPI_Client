@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import CompanyMaker from '../../Components/CompanyMaker';
 
-function EditCompany()
+function ViewCompany()
 {    
     const params = useParams();
     const history = useHistory();
@@ -35,7 +35,7 @@ function EditCompany()
         getCompany();
     },[params.id]);
 
-    async function updateCompany(e, companyBody)
+    async function saveCompany(e, companyBody)
     {
         e.preventDefault();
         const url = "https://localhost:44383/api/Company/UpdateCompany/" + params.id;
@@ -44,11 +44,22 @@ function EditCompany()
         .then((res) => {
             if(res.status === 200)
             {
-                history.push("/CompanyManager");
+                history.push("/Profile");
             }
         })
-        .catch((err) => {
+    }
 
+    async function deleteCompany(e)
+    {
+        e.preventDefault();
+        const url = "https://localhost:44383/api/Company/DeleteCompany/" + params.id;
+        
+        await axios.delete(url, {withCredentials: true})
+        .then((res) => {
+            if(res.status === 200)
+            {
+                history.push("/Profile");
+            }
         })
     }
 
@@ -57,7 +68,7 @@ function EditCompany()
             {isLoaded ?
                 <div>
                     {status === 200 
-                        ? <CompanyMaker handleSubmit={updateCompany} defaultCompanyVals={targetCompany} />
+                        ? <CompanyMaker handleSave={saveCompany} handleDelete={deleteCompany} cmd="Edit" defaultCompanyVals={targetCompany} />
                         : <div>404</div>
                     }
                 </div>
@@ -66,4 +77,4 @@ function EditCompany()
     );
 }
 
-export default EditCompany;
+export default ViewCompany;

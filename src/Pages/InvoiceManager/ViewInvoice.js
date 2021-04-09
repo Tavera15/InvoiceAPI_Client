@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router";
 import { useReactToPrint } from 'react-to-print';
 import Invoice from "../../Components/Invoice";
 import axios from 'axios';
+import "../../Components/Styles/CompanyForms.css";
 
 //https://www.youtube.com/watch?v=497riGWbhsQ
 
@@ -53,7 +54,7 @@ function ViewInvoice()
     return(
         <div>
             {isLoaded ? 
-                <div>
+                <div className="col-lg-12 view-invoice">
                     {loadStatus === 200 ?
                         <div>
                             <button

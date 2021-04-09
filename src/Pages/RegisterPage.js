@@ -3,12 +3,14 @@ import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import {useDispatch} from 'react-redux'
 import { userAuthentication } from '../App/AuthSlicer';
+import {useHistory} from 'react-router-dom';
 import "./LoginRegister.css"
 
 function RegisterPage()
 {
     const dispatch = useDispatch();
-
+    const history = useHistory();
+    
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,15 +19,11 @@ function RegisterPage()
     {
         e.preventDefault();
 
-        if(password !== confirmPassword)
-        {
-            return;
-        }
-
         const url = "https://localhost:44383/api/Account/Register";
-        await axios.post(url, {"email": email, "password": confirmPassword}, {withCredentials: true})
+        await axios.post(url, {"email": email, "password": password, "confirmPassword": confirmPassword}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
+                history.push("/Profile")
             })
     }
 
