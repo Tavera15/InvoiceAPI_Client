@@ -28,7 +28,7 @@ function ViewInvoice()
 
             await axios.get(url, {withCredentials: true})
                 .then((res) => {
-                    setInvoiceData(res.data)
+                    setInvoiceData(res.data);
                     setLoadStatus(res.status);
                 })
                 .catch((err) => {
@@ -52,8 +52,18 @@ function ViewInvoice()
             .then((res) => {
                 if(res.status === 200)
                 {
-                    history.push("/Profile")
+                    if(!res.data.isFinalized)
+                    {
+                        history.push("/Profile")
+                        return;
+                    }
+
+                    setInvoiceData(res.data);
+                    setLoadStatus(res.status)
                 }
+            })
+            .catch((err) => {
+                setLoadStatus(err.response.status)
             })
     }
 
@@ -68,6 +78,9 @@ function ViewInvoice()
                 {
                     history.push("/Profile")
                 }
+            })
+            .catch((err) => {
+                setLoadStatus(err.response.status);
             })
     }
 

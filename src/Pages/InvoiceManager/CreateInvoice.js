@@ -14,12 +14,19 @@ function CreateInvoice()
         const url = "https://localhost:44383/api/Invoice/NewInvoice";
 
         await axios.post(url, invoiceBody, {withCredentials: true})
-        .then((res) => {
-            if(res.status === 201)
-            {
-                history.push("/Profile")
-            }
-        })
+            .then((res) => {
+                if(res.status === 201)
+                {
+                    if(res.data.isFinalized)
+                    {
+                        history.push("/InvoiceManager/ViewInvoice/" + res.data.id);
+                    }
+                    else
+                    {
+                        history.push("/Profile")
+                    }
+                }
+            })
     }
 
     return(

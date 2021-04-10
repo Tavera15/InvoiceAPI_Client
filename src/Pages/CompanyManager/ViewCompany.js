@@ -41,12 +41,15 @@ function ViewCompany()
         const url = "https://localhost:44383/api/Company/UpdateCompany/" + params.id;
         
         await axios.put(url, companyBody, {withCredentials: true})
-        .then((res) => {
-            if(res.status === 200)
-            {
-                history.push("/Profile");
-            }
-        })
+            .then((res) => {
+                if(res.status === 200)
+                {
+                    history.push("/Profile");
+                }
+            })
+            .catch((err) => {
+                setStatus(err.response.status);
+            })
     }
 
     async function deleteCompany(e)
@@ -60,6 +63,9 @@ function ViewCompany()
             {
                 history.push("/Profile");
             }
+        })
+        .catch((err) => {
+            setStatus(err.response.status);
         })
     }
 

@@ -53,7 +53,9 @@ function CompanyTable()
 
     return(
         <div>
-            <input onChange={(e) => setInputCompanyText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+            <div className="col-12" style={{"margin": "10px 0", "padding": "0"}}>
+                <input onChange={(e) => setInputCompanyText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+            </div>
 
             <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-borderless table-light table-striped" data={companiesDisplayed} columns={columns} pagination={paginationFactory({
                 page: 0, // Specify the current page. It's necessary when remote is enabled

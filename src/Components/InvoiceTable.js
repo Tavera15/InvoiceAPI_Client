@@ -9,6 +9,7 @@ function InvoiceTable()
     const [allInvoices, setAllInvoices] = useState([]);
     const [invoicesDisplayed, setDisplayedInvoices] = useState([]);
     const [invoiceInputText, setInvoiceInputText] = useState("");
+    const [invoiceType, setInvoiceType] = useState("ALL");
 
     useEffect(() => {
         async function getInvoices()
@@ -28,17 +29,35 @@ function InvoiceTable()
     }, [allInvoices])
 
     useEffect(() => {
-        const res = invoiceInputText !== "" 
+        const textFilterInvoices = invoiceInputText !== "" 
             ? allInvoices
                 .filter((c) => 
                     c.id.includes(invoiceInputText)
-                    || c.companyName.toLowerCase().includes(invoiceInputText.toLowerCase()
-                    || c.customerName.toLowerCase().includes(invoiceInputText.toLowerCase())))
+                    || c.companyName.toLowerCase().includes(invoiceInputText.toLowerCase())
+                    || c.customerName.toLowerCase().includes(invoiceInputText.toLowerCase()))
             : allInvoices;
 
+        let res = [];
+        
+        switch (invoiceType) {
+            case "COMPLETE":
+                res = textFilterInvoices.filter((i) => i.isFinalized);
+                break;
+            case "DRAFTS":
+                res = textFilterInvoices.filter((i) => !i.isFinalized);
+                break;
+            default:
+                res = textFilterInvoices;
+                break;
+        }
+        
         setDisplayedInvoices(res)
 
-    }, [invoiceInputText, allInvoices])
+    }, [invoiceInputText, allInvoices, invoiceType])
+
+    useEffect(() => {
+
+    },[invoiceType])
 
     const columns = [
         {
@@ -79,7 +98,20 @@ function InvoiceTable()
 
     return(
         <div>
-            <input onChange={(e) => setInvoiceInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+            <div className="col-12" style={{"margin": "10px 0", "padding": "0"}}>
+                <div className="row">
+                    <div className="col-8">
+                        <input className="col-12" onChange={(e) => setInvoiceInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
+                    </div>
+                    <div className="col-4">
+                        <select className="col-12" onChange={(e) => setInvoiceType(e.target.value)} name="invoiceChoice" id="invoice-choices">
+                            <option value="ALL">All</option>
+                            <option value="COMPLETE">Complete Only</option>
+                            <option value="DRAFTS">Drafts Only</option>
+                        </select>        
+                    </div>
+                </div>
+            </div>
 
             <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-light table-borderless table-striped table-responsive-xs" data={invoicesDisplayed} columns={columns} pagination={paginationFactory({
                 page: 0, // Specify the current page. It's necessary when remote is enabled

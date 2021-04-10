@@ -6,7 +6,7 @@ import './Styles/Profile.css';
 function ProfilePage()
 {
     return(
-        <div className="col-lg-8 center-block dark-bg">
+        <div className="col-lg-8 center-block dark-bg dark-box-shadow" >
             <div className="base-page row">
                 <div className="col-xl-4 col-lg-12  col-md-12 center-block dist-block">
                     <h1 className="table-name">Company Manager</h1>
