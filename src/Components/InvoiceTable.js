@@ -44,11 +44,29 @@ function InvoiceTable()
         {
             dataField: 'companyName',
             text: 'Company Name',
+            style:{borderBottom: "1px black solid"},
+            classes: (row, rowContent) => {
+                return (rowContent.isFinalized ? "table-success text-dark align-middle" : "table-warning text-dark align-middle")
+            },
             formatter: (row, rowContent) => rowContent.companyName
-        }, 
+        },
+        {
+            dataField: 'customerName',
+            text: 'Customer Name',
+            style:{borderBottom: "1px black solid"},
+            classes: (row, rowContent) => {
+                return (rowContent.isFinalized ? "table-success text-dark align-middle" : "table-warning text-dark align-middle")
+            },
+            formatter: (row, rowContent) => rowContent.customerName
+        },
         {
             dataField: 'actions',
             text: 'Actions',
+            style:{borderBottom: "1px black solid"},
+            classes: (row, rowContent) => {
+                return (rowContent.isFinalized ? "table-success text-dark align-middle" : "table-warning text-dark align-middle")
+            },
+
             formatter: (row, rowContent) => {
                 return (
                     <div>
@@ -63,7 +81,7 @@ function InvoiceTable()
         <div>
             <input onChange={(e) => setInvoiceInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
 
-            <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-light table-striped" data={invoicesDisplayed} columns={columns} pagination={paginationFactory({
+            <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-light table-borderless table-striped table-responsive-xs" data={invoicesDisplayed} columns={columns} pagination={paginationFactory({
                 page: 0, // Specify the current page. It's necessary when remote is enabled
                 sizePerPage: 10, // Specify the size per page. It's necessary when remote is enabled
                 totalSize: invoicesDisplayed.length, // Total data size. It's necessary when remote is enabled
@@ -89,32 +107,6 @@ function InvoiceTable()
             }) } />
         </div>
     )
-
-    /* return(
-        <div className="col-lg-8 col-sm-12" style={{"margin": "20px auto 0"}}>
-            <input onChange={(e) => setInvoiceInputText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
-
-            <table className="table">
-                <thead className="thead-dark">
-                    <tr>
-                        <th scope="col">Company Name</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {invoicesDisplayed.map((c, i) => 
-                        <tr key={i}>
-                            <td className="align-middle">{c.companyName}</td>
-                            <td>
-                                <a href={"/InvoiceManager/EditInvoice/" + c.id} className="btn">Edit</a>
-                                <a href={"/InvoiceManager/DeleteInvoice/" + c.id} className="btn">Delete</a>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    ) */
 }
 
 export default InvoiceTable;

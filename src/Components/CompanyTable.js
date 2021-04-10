@@ -34,11 +34,13 @@ function CompanyTable()
         {
             dataField: 'companyName',
             text: 'Company Name',
+            classes: "align-middle",
             formatter: (row, rowContent) => rowContent.companyName
         }, 
         {
             dataField: 'actions',
             text: 'Actions',
+            classes: "align-middle",
             formatter: (row, rowContent) => {
                 return (
                     <div>
@@ -53,7 +55,7 @@ function CompanyTable()
         <div>
             <input onChange={(e) => setInputCompanyText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
 
-            <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-light table-striped" data={companiesDisplayed} columns={columns} pagination={paginationFactory({
+            <BootstrapTable headerClasses="thead-dark" rowClasses="align-items-center" keyField='id' classes="table table-borderless table-light table-striped" data={companiesDisplayed} columns={columns} pagination={paginationFactory({
                 page: 0, // Specify the current page. It's necessary when remote is enabled
                 sizePerPage: 10, // Specify the size per page. It's necessary when remote is enabled
                 totalSize: companiesDisplayed.length, // Total data size. It's necessary when remote is enabled
@@ -79,32 +81,6 @@ function CompanyTable()
             }) } />
         </div>
     )
-
-    /* return(
-        <div className="col-lg-8 col-sm-12" style={{"margin": "20px auto 0"}}>
-            <input onChange={(e) => setInputCompanyText(e.target.value)} style={{"border": "solid black 1px", "width": "100%"}} placeholder="Search"/>
-
-            <table className="table">
-                <thead className="thead-dark">
-                    <tr>
-                        <th scope="col">Company Name</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {companiesDisplayed.map((c, i) => 
-                        <tr key={i}>
-                            <td className="align-middle">{c.companyName}</td>
-                            <td>
-                                <a href={"/CompanyManager/EditCompany/" + c.id} className="btn btn-default">Edit</a>
-                                <a href={"/CompanyManager/DeleteCompany/" + c.id} className="btn btn-default">Delete</a>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    ) */
 }
 
 export default CompanyTable;
