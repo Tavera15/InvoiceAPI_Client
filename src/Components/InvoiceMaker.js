@@ -40,6 +40,7 @@ function InvoiceMaker(props)
     const [subtotal, setSubtotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
     const [notes, setNotes] = useState("");
+    const [logo, setLogo] = useState("");
 
     useEffect(() => {
         if(props.defaultInvoiceVals !== undefined)
@@ -63,6 +64,7 @@ function InvoiceMaker(props)
             setProductsList(props.defaultInvoiceVals.productOrServices);
             setTaxRate(props.defaultInvoiceVals.taxRate);
             setNotes(props.defaultInvoiceVals.notes);
+            setLogo(props.defaultInvoiceVals.companyLogo);
         }
 
     }, [props.defaultInvoiceVals])
@@ -78,6 +80,15 @@ function InvoiceMaker(props)
         
         getCompanies();
     }, []);
+
+    useEffect(() => {
+        const isLogoAvailable = logo !== "" && logo !== null;
+
+        document.getElementById("logo-img").src = logo;
+        document.getElementById("logo-img").className = isLogoAvailable ? "" : "d-none";
+        document.getElementById("clear-logo-cont").className = isLogoAvailable ? "" : "d-none";
+        
+    }, [logo])
 
     useEffect(() => {
         function calcultateGrandTotal()
@@ -117,6 +128,7 @@ function InvoiceMaker(props)
             setCompanyZip(choice.zipCode);
             setCompanyEmail(choice.emailAddress);
             setCompanyPhone(choice.phoneNumber);
+            setLogo(choice.companyLogo);
         }
     }
 
@@ -175,7 +187,8 @@ function InvoiceMaker(props)
             "isFinalized": isFinal,
             "taxRate": taxRate,
             "products": productsList,
-            "notes": notes
+            "notes": notes,
+            "companyLogo": logo
         }
 
         props.handleSave(e, body);
@@ -185,16 +198,44 @@ function InvoiceMaker(props)
         ? "col-4"
         : "col-6"
 
+    function handleImgUpload(e)
+    {
+        const newLogoImg = e.target.files[0];
+
+        if(newLogoImg !== undefined)
+        {
+            const reader = new FileReader();
+            reader.readAsDataURL(newLogoImg);
+            
+            reader.onload = function () {
+                const imgBytes = JSON.stringify(reader.result)
+                setLogo(imgBytes.substring(1, imgBytes.length-1));
+            }
+        }
+    }
+
     return(
-        <div className="col-lg-4 col-md-8 col-sm-12 creation-page">
+        <div className="col-xl-4 col-md-8 col-sm-12 creation-page">
+            <div className="col-lg-12 logo-cont">
+                <img src={logo} alt="logo" id="logo-img" className="col-12" />
+            </div>
+            <div id="clear-logo-cont">
+                <Button type="button" className="btn btn-danger" onClick={(e) => setLogo("")}>Clear Logo</Button>
+            </div>
             <h1 className="form-name">{props.cmd} Invoice</h1>
             <Form>
                 <div>
                     <hr />
                     <h3 className="form-name">Company Details</h3>
+                    <div className="form-group row">
+                        <div className="col-12">
+                            <label>Logo</label>
+                            <input alt="logo-input" className="btn btn-default" type="file" accept="image/png" onChange={(e) => handleImgUpload(e)} />
+                        </div>
+                    </div>
 
                     <div className="col-12 select-block">
-                        <select onChange={(e) => handleSelect(e)} className="form-select col-4 btn btn-dark" aria-label="Default select example">
+                        <select onChange={(e) => handleSelect(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
                             <option hidden defaultValue>Select Company</option>
                             {allCompanies.map((c, i) => 
                                 <option key={i} value={c.id}>{c.companyName}</option>

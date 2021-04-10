@@ -32,3 +32,18 @@
     padding: 0 !important;
     text-align: left;
 }
+
+.logo-cont{
+    text-align: center;
+}
+
+#logo-img{
+    object-fit: contain;
+    height: 15rem;
+    width: 100%;
+}
+
+#clear-logo-cont{
+    margin: 20px 0;
+    text-align: center;
+}
