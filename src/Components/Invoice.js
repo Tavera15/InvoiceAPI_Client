@@ -7,11 +7,21 @@ const Invoice = React.forwardRef((props, ref) =>
         <div className="container-fluid col-lg-8 col-md-12" ref={ref}>
             <div id="ui-view" data-select2-id="ui-view">
                 <div>
+                    {console.log(props.data.date)}
                     <div className="card">
                         <div className="card-header text-center">Invoice:
                             <strong> #{props.data.id}</strong>
                         </div>
                         <div className="card-body">
+
+                            { props.data.companyLogo !== "" && props.data.companyLogo !== null
+                                ? <div className="col-lg-12" id="logo-cont">
+                                     <img id="logo-img" src={props.data.companyLogo} alt="logo"/>
+                                 </div>
+
+                                :<div></div>
+                            }
+
                             <div className="col-lg-12 mb-4">
                                 <div className="row">
                                     <div className="invoice-header-block lightgrey-border">
@@ -81,7 +91,7 @@ const Invoice = React.forwardRef((props, ref) =>
                                                         <div>Invoice:
                                                             <strong> #{props.data.id}</strong>
                                                         </div>
-                                                        <div>Date Created: April 30, 2019</div>
+                                                        <div>Date Created: {props.data.date}</div>
                                                     </td>
                                                 </tr>
                                             </tbody>

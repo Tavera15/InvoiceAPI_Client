@@ -81,7 +81,7 @@ function ViewInvoice()
                                 <div className="col-lg-12 view-invoice">
                                     <button
                                         type="button"
-                                        className="bg-gray-500 border border-gray-500 p-2 mb-4"
+                                        className="p-2 mb-4 btn btn-success"
                                         onClick={handlePrint}>
                                         {" "}
                                         Print Invoice{" "}

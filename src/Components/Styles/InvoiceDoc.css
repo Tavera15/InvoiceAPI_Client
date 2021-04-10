@@ -28,6 +28,16 @@
     width: 30%;
 }
 
+#logo-img{
+    object-fit: contain;
+    height: 8rem;
+    width: 100%;
+}
+
+#logo-cont{
+    margin: 0 0 20px;
+}
+
 @media (max-width: 768px){
     .invoice-footer-notes{
         width: 100%;

@@ -4,7 +4,7 @@ function HomePage()
 {
     return(
         <div className="col-12">
-            <div className="col-sm-6 table-light" style={{"margin": "5% auto", "padding": "5%", "borderRadius": "10px",}}>
+            <div className="col-sm-6 bg-light" style={{"margin": "5% auto", "padding": "5%", "borderRadius": "10px",}}>
                 <h1>Build Invoices For Free!</h1>
                 <img style={{"margin": "30px 0", "width": "50%", "height": "auto"}} alt="icon" src={"https://banner.uclipart.com/20200112/eos/coffee-cup-coffee-cup.png"}/>
                 <div className="row">

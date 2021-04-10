@@ -20,9 +20,6 @@ function CreateInvoice()
                 history.push("/Profile")
             }
         })
-        .catch((err) => {
-
-        })
     }
 
     return(
