@@ -7,7 +7,6 @@ const Invoice = React.forwardRef((props, ref) =>
         <div className="container-fluid col-lg-8 col-md-12" ref={ref}>
             <div id="ui-view" data-select2-id="ui-view">
                 <div>
-                    {console.log(props.data.date)}
                     <div className="card">
                         <div className="card-header text-center">Invoice:
                             <strong> #{props.data.id}</strong>

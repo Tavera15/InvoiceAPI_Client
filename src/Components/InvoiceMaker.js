@@ -42,6 +42,8 @@ function InvoiceMaker(props)
     const [notes, setNotes] = useState("");
     const [logo, setLogo] = useState("");
 
+    const [isFinalized, setIsFinalized] = useState(false);
+
     useEffect(() => {
         if(props.defaultInvoiceVals !== undefined)
         {
@@ -165,7 +167,7 @@ function InvoiceMaker(props)
         setProductsList([...productsList]);
     }
 
-    function handleSave(e, isFinal)
+    function handleSave(e)
     {
         e.preventDefault();
 
@@ -184,7 +186,7 @@ function InvoiceMaker(props)
             "customerCity": customerCity,
             "customerState": customerState,
             "customerZipCode": customerZip,
-            "isFinalized": isFinal,
+            "isFinalized": isFinalized,
             "taxRate": taxRate,
             "products": productsList,
             "notes": notes,
@@ -223,7 +225,7 @@ function InvoiceMaker(props)
                 <Button type="button" className="btn btn-danger" onClick={(e) => setLogo("")}>Clear Logo</Button>
             </div>
             <h1 className="form-name">{props.cmd} Invoice</h1>
-            <Form>
+            <Form id='invoice-form' onSubmit={(e) => handleSave(e)}>
                 <div>
                     <hr />
                     <h3 className="form-name">Company Details</h3>
@@ -234,18 +236,22 @@ function InvoiceMaker(props)
                         </div>
                     </div>
 
-                    <div className="col-12 select-block">
-                        <select onChange={(e) => handleSelect(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
-                            <option hidden defaultValue>Select Company</option>
-                            {allCompanies.map((c, i) => 
-                                <option key={i} value={c.id}>{c.companyName}</option>
-                                )}
-                        </select>
-                    </div>
+                    {
+                        allCompanies.length > 0 
+                        ?   <div className="col-12 select-block">
+                                <select onChange={(e) => handleSelect(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
+                                    <option hidden defaultValue>Select Company</option>
+                                    {allCompanies.map((c, i) => 
+                                        <option key={i} value={c.id}>{c.companyName}</option>
+                                        )}
+                                </select>
+                            </div>
+                        : <div></div>
+                    }
                     
                     <div className="form-group">
                         <label htmlFor="inputName">Company Name</label>
-                        <input value={companyName || ""} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
+                        <input value={companyName || ""} required onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
                     </div>
                     <div className="form-row">
                         <div className="form-group col-md-6">
@@ -285,7 +291,7 @@ function InvoiceMaker(props)
 
                     <div className="form-group">
                         <label htmlFor="inputCustomerName">Customer Name</label>
-                        <input value={customerName || ""} onChange={(e) => setCustomerName(e.target.value)} type="text" className="form-control" id="inputCustomerName" />
+                        <input value={customerName || ""} required onChange={(e) => setCustomerName(e.target.value)} type="text" className="form-control" id="inputCustomerName" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputCustomerAddress1">Customer Address Line 1</label>
@@ -435,15 +441,15 @@ function InvoiceMaker(props)
             <div className="col-12">
                 <div className="row">
                     <div className={btn_class}>
-                        <Button type="submit" onClick={(e) => handleSave(e, false)} className="btn btn-primary col-12">Save</Button>
+                        <Button form="invoice-form" type="submit" onClick={(e) => setIsFinalized(false)} className="btn btn-primary col-12">Save</Button>
                     </div>
                     <div className={btn_class}>
-                        <Button type="submit" onClick={(e) => handleSave(e, true)} className="btn btn-success col-12">Generate</Button>
+                        <Button form="invoice-form" type="submit" onClick={(e) => setIsFinalized(true)} className="btn btn-success col-12">Generate</Button>
                     </div>
                     {
                         props.handleDelete !== undefined
                             ?   <div className={btn_class}>
-                                    <Button type="submit" onClick={(e) => props.handleDelete(e)} className="btn btn-danger col-12">Delete</Button>
+                                    <Button type="button" onClick={(e) => props.handleDelete(e)} className="btn btn-danger col-12">Delete</Button>
                                 </div>
                             :   <div></div>
                     } 
