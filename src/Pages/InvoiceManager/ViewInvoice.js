@@ -5,6 +5,7 @@ import Invoice from "../../Components/Invoice";
 import axios from 'axios';
 import "../../Components/Styles/CompanyForms.css";
 import InvoiceMaker from "../../Components/InvoiceMaker";
+import NotFoundPage from "../NotFoundPage";
 
 //https://www.youtube.com/watch?v=497riGWbhsQ
 
@@ -106,7 +107,7 @@ function ViewInvoice()
                             }
                         </div>
                     
-                    : <div>404</div>
+                    : <NotFoundPage />
                     }
                 </div>
 

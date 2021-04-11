@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import CompanyMaker from '../../Components/CompanyMaker';
+import NotFoundPage from '../NotFoundPage';
 
 function ViewCompany()
 {    
@@ -75,7 +76,7 @@ function ViewCompany()
                 <div>
                     {status === 200 
                         ? <CompanyMaker handleSave={saveCompany} handleDelete={deleteCompany} cmd="Edit" defaultCompanyVals={targetCompany} />
-                        : <div>404</div>
+                        : <NotFoundPage />
                     }
                 </div>
             : <div>Loading...</div>}

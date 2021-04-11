@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { userAuthentication } from './App/AuthSlicer';
 import PrivateRoute from "./Components/PrivateRoute";
 import HomePage from "./Pages/HomePage";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 function App() 
 {
@@ -67,6 +68,8 @@ function App()
 
                 <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
                 <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
+
+                <Route path='*' exact={true} component={NotFoundPage} />
 
             </Switch>
           </Router>
