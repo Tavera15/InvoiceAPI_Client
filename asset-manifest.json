@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/TaveraInvoice/static/css/main.67d0650d.chunk.css",
-    "main.js": "/TaveraInvoice/static/js/main.2604464b.chunk.js",
-    "main.js.map": "/TaveraInvoice/static/js/main.2604464b.chunk.js.map",
-    "runtime-main.js": "/TaveraInvoice/static/js/runtime-main.26e26b8c.js",
-    "runtime-main.js.map": "/TaveraInvoice/static/js/runtime-main.26e26b8c.js.map",
-    "static/css/2.6a4a692e.chunk.css": "/TaveraInvoice/static/css/2.6a4a692e.chunk.css",
-    "static/js/2.c7f59e2b.chunk.js": "/TaveraInvoice/static/js/2.c7f59e2b.chunk.js",
-    "static/js/2.c7f59e2b.chunk.js.map": "/TaveraInvoice/static/js/2.c7f59e2b.chunk.js.map",
-    "static/js/3.4c160401.chunk.js": "/TaveraInvoice/static/js/3.4c160401.chunk.js",
-    "static/js/3.4c160401.chunk.js.map": "/TaveraInvoice/static/js/3.4c160401.chunk.js.map",
-    "index.html": "/TaveraInvoice/index.html",
-    "static/css/2.6a4a692e.chunk.css.map": "/TaveraInvoice/static/css/2.6a4a692e.chunk.css.map",
-    "static/css/main.67d0650d.chunk.css.map": "/TaveraInvoice/static/css/main.67d0650d.chunk.css.map",
-    "static/js/2.c7f59e2b.chunk.js.LICENSE.txt": "/TaveraInvoice/static/js/2.c7f59e2b.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/TaveraInvoice/static/media/sign-bg.08145534.jpg",
-    "static/media/spill.5cb7a093.png": "/TaveraInvoice/static/media/spill.5cb7a093.png"
+    "main.css": "/InvoiceAPI_Client/static/css/main.fefaf972.chunk.css",
+    "main.js": "/InvoiceAPI_Client/static/js/main.2604464b.chunk.js",
+    "main.js.map": "/InvoiceAPI_Client/static/js/main.2604464b.chunk.js.map",
+    "runtime-main.js": "/InvoiceAPI_Client/static/js/runtime-main.b23911a1.js",
+    "runtime-main.js.map": "/InvoiceAPI_Client/static/js/runtime-main.b23911a1.js.map",
+    "static/css/2.6a4a692e.chunk.css": "/InvoiceAPI_Client/static/css/2.6a4a692e.chunk.css",
+    "static/js/2.c7f59e2b.chunk.js": "/InvoiceAPI_Client/static/js/2.c7f59e2b.chunk.js",
+    "static/js/2.c7f59e2b.chunk.js.map": "/InvoiceAPI_Client/static/js/2.c7f59e2b.chunk.js.map",
+    "static/js/3.4c160401.chunk.js": "/InvoiceAPI_Client/static/js/3.4c160401.chunk.js",
+    "static/js/3.4c160401.chunk.js.map": "/InvoiceAPI_Client/static/js/3.4c160401.chunk.js.map",
+    "index.html": "/InvoiceAPI_Client/index.html",
+    "static/css/2.6a4a692e.chunk.css.map": "/InvoiceAPI_Client/static/css/2.6a4a692e.chunk.css.map",
+    "static/css/main.fefaf972.chunk.css.map": "/InvoiceAPI_Client/static/css/main.fefaf972.chunk.css.map",
+    "static/js/2.c7f59e2b.chunk.js.LICENSE.txt": "/InvoiceAPI_Client/static/js/2.c7f59e2b.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/InvoiceAPI_Client/static/media/sign-bg.08145534.jpg",
+    "static/media/spill.5cb7a093.png": "/InvoiceAPI_Client/static/media/spill.5cb7a093.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.26e26b8c.js",
+    "static/js/runtime-main.b23911a1.js",
     "static/css/2.6a4a692e.chunk.css",
     "static/js/2.c7f59e2b.chunk.js",
-    "static/css/main.67d0650d.chunk.css",
+    "static/css/main.fefaf972.chunk.css",
     "static/js/main.2604464b.chunk.js"
   ]
 }
