@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function HomePage()
 {
@@ -9,10 +10,10 @@ function HomePage()
                 <img style={{"margin": "30px 0", "width": "50%", "height": "auto"}} alt="icon" src={"https://banner.uclipart.com/20200112/eos/coffee-cup-coffee-cup.png"}/>
                 <div className="row">
                     <div className="col-6">
-                        <a className="btn btn-primary col-12" href="/Register">Register</a>
+                        <Link className="btn btn-primary col-12" to="/Register">Register</Link>
                     </div>
                     <div className="col-6">
-                        <a className="btn btn-dark col-12" href="/Login">Login</a>
+                        <Link className="btn btn-dark col-12" to="/Login">Login</Link>
                     </div>
                 </div>
             </div>

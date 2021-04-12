@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import {useDispatch} from 'react-redux'
 import { userAuthentication } from '../App/AuthSlicer';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import "./LoginRegister.css"
 
 function LoginPage()
