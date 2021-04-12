@@ -55,7 +55,7 @@ function ViewInvoice()
                 {
                     if(!res.data.isFinalized)
                     {
-                        history.push("/InvoiceAPI_Client/Profile")
+                        history.push("/Profile")
                         return;
                     }
 
@@ -77,7 +77,7 @@ function ViewInvoice()
             .then((res) => {
                 if(res.status === 200)
                 {
-                    history.push("/InvoiceAPI_Client/Profile")
+                    history.push("/Profile")
                 }
             })
             .catch((err) => {

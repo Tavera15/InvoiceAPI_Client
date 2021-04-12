@@ -16,7 +16,7 @@ function CreateCompany()
             .then((res) => {
                 if(res.status === 201)
                 {
-                    history.push("/InvoiceAPI_Client/Profile/");
+                    history.push("/Profile");
                 }
             })
     }

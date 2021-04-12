@@ -24,7 +24,7 @@ function RegisterPage()
         await axios.post(url, {"email": email, "password": password, "confirmPassword": confirmPassword}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
-                history.push("/InvoiceAPI_Client/Profile")
+                history.push("/Profile")
             })
             .catch((err) => {
                 setErrMessages(err.response.data.errMessage);

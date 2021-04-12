@@ -7,7 +7,7 @@ function PrivateRoute(props)
     const {isLoggedIn} = useSelector(state => state.AuthSlice);
 
     return(
-        <Route exact path={props.path} render={() => isLoggedIn ? (props.Comp) : (<Redirect to="/InvoiceAPI_Client/Login" />)} />
+        <Route exact path={props.path} render={() => isLoggedIn ? (props.Comp) : (<Redirect to="/Login" />)} />
     )
 }
 
