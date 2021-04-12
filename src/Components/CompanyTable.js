@@ -44,7 +44,7 @@ function CompanyTable()
             formatter: (row, rowContent) => {
                 return (
                     <div>
-                        <a href={"/CompanyManager/ViewCompany/" + rowContent.id} className="btn btn-default">View</a>
+                        <a href={"/InvoiceAPI_Client/CompanyManager/ViewCompany/" + rowContent.id} className="btn btn-default">View</a>
                     </div>
                 )
             }

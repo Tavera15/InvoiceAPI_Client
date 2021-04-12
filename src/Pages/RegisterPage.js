@@ -14,6 +14,7 @@ function RegisterPage()
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errMessages, setErrMessages] = useState("");
 
     async function submitHandler(e)
     {
@@ -23,7 +24,10 @@ function RegisterPage()
         await axios.post(url, {"email": email, "password": password, "confirmPassword": confirmPassword}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
-                history.push("/Profile")
+                history.push("/InvoiceAPI_Client/Profile")
+            })
+            .catch((err) => {
+                setErrMessages(err.response.data.errMessage);
             })
     }
 
@@ -38,7 +42,7 @@ function RegisterPage()
 
                     <div className="credential-section">
                         <Form.Row className="justify-content-center">
-                            <input className="credential-input" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                            <input required={true} className="credential-input" type="email" onChange={(e) => setEmail(e.target.value)}/>
                         </Form.Row>
                     
                         <Form.Row className="">
@@ -48,7 +52,7 @@ function RegisterPage()
 
                     <div className="credential-section">
                         <Form.Row className="justify-content-center">                    
-                            <input className="credential-input" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                            <input required={true} className="credential-input" type="password" onChange={(e) => setPassword(e.target.value)}/>
                         </Form.Row>
 
                         <Form.Row className="">                    
@@ -58,13 +62,25 @@ function RegisterPage()
 
                     <div className="credential-section">
                         <Form.Row className="justify-content-center">                    
-                            <input className="credential-input" type="password" onChange={(e) => setConfirmPassword(e.target.value)}/>
+                            <input required={true} className="credential-input" type="password" onChange={(e) => setConfirmPassword(e.target.value)}/>
                         </Form.Row>
                         
                         <Form.Row className="">                    
                             <label className="credential-label">Confirm Password</label>
                         </Form.Row>
                     </div>
+
+                    {
+                        errMessages !== ""
+                        ?   <div className="col-12 err-messages">
+                                {
+                                    errMessages.split(".").map((e, i) => { 
+                                        return (<p key={i} className="text-danger">{e}</p>)
+                                    })
+                                }
+                            </div>
+                        :   <div></div>
+                    }
 
                     <div className="signin-submit-btn">
                         <Form.Row className="justify-content-center">                    

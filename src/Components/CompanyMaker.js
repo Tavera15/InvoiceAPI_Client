@@ -92,7 +92,7 @@ function CompanyMaker(props)
             </div>
             <h1 className="form-name">{props.cmd} Company</h1>
             <hr />
-            <Form>
+            <Form onSubmit={(e) => handleSave(e)}>
                 <div className="form-group row">
                     <div className="col-12">
                         <label>Logo</label>
@@ -101,7 +101,7 @@ function CompanyMaker(props)
                 </div>
                 <div className="form-group">
                     <label htmlFor="inputName">Company Name</label>
-                    <input value={companyName || ""} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
+                    <input value={companyName || ""} required={true} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-control" id="inputName" />
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
@@ -138,7 +138,7 @@ function CompanyMaker(props)
                 <div className="col-lg-12">
                     <div className="row">
                         <div className={btn_class}>
-                            <Button onClick={handleSave} type="button" className="btn btn-success col-12">Save</Button>
+                            <Button type="submit" className="btn btn-success col-12">Save</Button>
                         </div>
 
                         {

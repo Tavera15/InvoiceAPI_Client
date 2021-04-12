@@ -45,7 +45,7 @@ function ViewCompany()
             .then((res) => {
                 if(res.status === 200)
                 {
-                    history.push("/Profile");
+                    history.push("/InvoiceAPI_Client/Profile/");
                 }
             })
             .catch((err) => {
@@ -62,7 +62,7 @@ function ViewCompany()
         .then((res) => {
             if(res.status === 200)
             {
-                history.push("/Profile");
+                history.push("/InvoiceAPI_Client/Profile/");
             }
         })
         .catch((err) => {

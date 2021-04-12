@@ -13,6 +13,7 @@ function LoginPage()
     
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
+    const [errMessages, setErrMessages] = useState("");
 
     async function submitHandler(e)
     {   
@@ -22,7 +23,10 @@ function LoginPage()
         await axios.post(url, {"email": email, "password": password}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
-                history.push("/Profile")
+                history.push("/InvoiceAPI_Client/Profile")
+            })
+            .catch((err) => {
+                setErrMessages(err.response.data.errMessage);
             })
     }
 
@@ -54,6 +58,18 @@ function LoginPage()
                             <label className="credential-label">Password</label>
                         </Form.Row>
                     </div>
+
+                    {
+                        errMessages !== ""
+                        ?   <div className="col-12 err-messages">
+                                {
+                                    errMessages.split(".").map((e, i) => { 
+                                        return (<p key={i} className="text-danger">{e}</p>)
+                                    })
+                                }
+                            </div>
+                        :   <div></div>
+                    }
 
                     <div className="signin-submit-btn">
                         <Form.Row className="justify-content-center">                    

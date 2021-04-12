@@ -89,7 +89,7 @@ function InvoiceTable()
             formatter: (row, rowContent) => {
                 return (
                     <div>
-                        <a href={"/InvoiceManager/ViewInvoice/" + rowContent.id} className="btn btn-default">View</a>
+                        <a href={"/InvoiceAPI_Client/InvoiceManager/ViewInvoice/" + rowContent.id} className="btn btn-default">View</a>
                     </div>
                 )
             }

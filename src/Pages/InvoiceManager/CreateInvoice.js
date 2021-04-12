@@ -19,11 +19,11 @@ function CreateInvoice()
                 {
                     if(res.data.isFinalized)
                     {
-                        history.push("/InvoiceManager/ViewInvoice/" + res.data.id);
+                        history.push("/InvoiceAPI_Client/InvoiceManager/ViewInvoice/" + res.data.id);
                     }
                     else
                     {
-                        history.push("/Profile")
+                        history.push("/InvoiceAPI_Client/Profile/")
                     }
                 }
             })

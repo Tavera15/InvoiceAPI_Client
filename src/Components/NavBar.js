@@ -12,7 +12,7 @@ function NavBar()
     const {isLoggedIn} = useSelector(state => state.AuthSlice);
     const {userEmail} = useSelector(state => state.AuthSlice);
 
-    const logoLink = isLoggedIn ? "/Profile" : "/";
+    const logoLink = isLoggedIn ? "/InvoiceAPI_Client/Profile" : "/InvoiceAPI_Client/";
 
     async function handleLogout(e)
     {
@@ -47,8 +47,8 @@ function NavBar()
                             Manager
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="nav-link" href="/CompanyManager/NewCompany">New Company</a>
-                                <a className="nav-link" href="/InvoiceManager/NewInvoice">New Invoice</a>
+                                <a className="nav-link" href="/InvoiceAPI_Client/InvoiceManager/NewInvoice">New Invoice</a>
+                                <a className="nav-link" href="/InvoiceAPI_Client/CompanyManager/NewCompany">New Company</a>
                             </div>
                           </li>
                         : <div></div>
@@ -61,11 +61,11 @@ function NavBar()
                             {
                                 !isLoggedIn
                                 ? <div>
-                                      <Link to="/Login" className="btn btn-light">Login</Link>
-                                      <Link to="/Register" className="btn btn-light">Register</Link>
+                                      <Link to="/InvoiceAPI_Client/Login" className="btn btn-light">Login</Link>
+                                      <Link to="/InvoiceAPI_Client/Register" className="btn btn-light">Register</Link>
                                   </div>
                                 : <div>
-                                      <a className="btn btn-light" href="/Profile">{userEmail}</a>
+                                      <a className="btn btn-light" href="/InvoiceAPI_Client/Profile">{userEmail}</a>
                                       <Button type="button" className="btn btn-light" onClick={(e) => handleLogout(e)}>Logout</Button>
                                   </div> 
                             }

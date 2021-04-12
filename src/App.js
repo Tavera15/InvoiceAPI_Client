@@ -49,25 +49,25 @@ function App()
           <Router>
             <NavBar />
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/InvoiceAPI_Client">
                   <HomePage />
                 </Route>
 
-                <Route exact path="/Login">
+                <Route exact path="/InvoiceAPI_Client/Login">
                   <LoginPage />
                 </Route>
 
-                <Route exact path="/Register">
+                <Route exact path="/InvoiceAPI_Client/Register">
                   <RegisterPage />
                 </Route>
 
-                <PrivateRoute Comp={<ProfilePage />} path="/Profile/"/>
+                <PrivateRoute Comp={<ProfilePage />} path="/InvoiceAPI_Client/Profile/"/>
 
-                <PrivateRoute Comp={<CreateCompany />} path="/CompanyManager/NewCompany/"/>
-                <PrivateRoute Comp={<ViewCompany />} path="/CompanyManager/ViewCompany/:id"/>
+                <PrivateRoute Comp={<CreateCompany />} path="/InvoiceAPI_Client/CompanyManager/NewCompany/"/>
+                <PrivateRoute Comp={<ViewCompany />} path="/InvoiceAPI_Client/CompanyManager/ViewCompany/:id"/>
 
-                <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
-                <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
+                <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceAPI_Client/InvoiceManager/NewInvoice"/>
+                <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceAPI_Client/InvoiceManager/ViewInvoice/:id"/>
 
                 <Route path='*' exact={true} component={NotFoundPage} />
 
