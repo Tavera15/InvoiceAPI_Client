@@ -2,7 +2,6 @@
   "name": "invoice_api_client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tavera15.github.io/InvoiceAPI_Client/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.10",
