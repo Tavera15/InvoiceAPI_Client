@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {HashRouter  as Router, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import NavBar from './Components/NavBar.js';

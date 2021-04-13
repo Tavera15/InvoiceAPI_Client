@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-
+import {Link} from 'react-router-dom';
 
 function InvoiceTable()
 {
@@ -85,7 +85,7 @@ function InvoiceTable()
             formatter: (row, rowContent) => {
                 return (
                     <div>
-                        <a href={"/InvoiceManager/ViewInvoice/" + rowContent.id} className="btn btn-default">View</a>
+                        <Link to={"/InvoiceManager/ViewInvoice/" + rowContent.id} className="btn btn-default">View</Link>
                     </div>
                 )
             }

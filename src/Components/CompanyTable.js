@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import {Link} from 'react-router-dom';
 
 function CompanyTable()
 {
@@ -44,7 +45,7 @@ function CompanyTable()
             formatter: (row, rowContent) => {
                 return (
                     <div>
-                        <a href={"/CompanyManager/ViewCompany/" + rowContent.id} className="btn btn-default">View</a>
+                        <Link to={"/CompanyManager/ViewCompany/" + rowContent.id} className="btn btn-default">View</Link>
                     </div>
                 )
             }

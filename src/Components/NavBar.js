@@ -10,7 +10,6 @@ function NavBar()
 {
     const dispatch = useDispatch();
     const {isLoggedIn} = useSelector(state => state.AuthSlice);
-    const {userEmail} = useSelector(state => state.AuthSlice);
 
     const logoLink = isLoggedIn ? "/Profile" : "/";
 
@@ -29,7 +28,7 @@ function NavBar()
         
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href={logoLink}>Tavera Invoice</a>
+                <Link className="navbar-brand" to={logoLink}>Tavera Invoice</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -37,7 +36,7 @@ function NavBar()
                 <div className="collapse navbar-collapse" id="navbarText">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href={logoLink}>Home<span className="sr-only">(current)</span></a>
+                        <Link className="nav-link" to={logoLink}>Home<span className="sr-only">(current)</span></Link>
                     </li>
 
                     {
@@ -47,8 +46,8 @@ function NavBar()
                             Manager
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="nav-link" href="/InvoiceManager/NewInvoice">New Invoice</a>
-                                <a className="nav-link" href="/CompanyManager/NewCompany">New Company</a>
+                                <Link to="/InvoiceManager/NewInvoice" className="nav-link">New Invoice</Link>
+                                <Link to="/CompanyManager/NewCompany" className="nav-link">New Company</Link>
                             </div>
                           </li>
                         : <div></div>
@@ -64,7 +63,6 @@ function NavBar()
                                       <Link to="/Register" className="btn btn-light">Register</Link>
                                   </div>
                                 : <div>
-                                      <a className="btn btn-light" href="/Profile">{userEmail}</a>
                                       <Button type="button" className="btn btn-light" onClick={(e) => handleLogout(e)}>Logout</Button>
                                   </div> 
                             }

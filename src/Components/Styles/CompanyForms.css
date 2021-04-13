@@ -2,7 +2,7 @@
     background-color: rgba(30,30,30,.85);
     overflow: auto;
     margin: 5% auto;
-    padding: 20px 0 20px;
+    padding: 20px 0px !important;
     border: black 4px solid;
     box-shadow: 10px 10px 5px black;
     border-radius: 7px;
