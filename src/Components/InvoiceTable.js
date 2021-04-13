@@ -14,7 +14,7 @@ function InvoiceTable()
     useEffect(() => {
         async function getInvoices()
         {
-            const url = "https://localhost:44383/api/Invoice/GetInvoices";
+            const url = process.env.REACT_APP_API_URL + "/Invoice/GetInvoices";
             await axios.get(url, {withCredentials: true})
             .then((res) => {
                 setAllInvoices(res.data);
@@ -54,10 +54,6 @@ function InvoiceTable()
         setDisplayedInvoices(res)
 
     }, [invoiceInputText, allInvoices, invoiceType])
-
-    useEffect(() => {
-
-    },[invoiceType])
 
     const columns = [
         {

@@ -11,7 +11,7 @@ function CreateInvoice()
     {
         e.preventDefault();
 
-        const url = "https://localhost:44383/api/Invoice/NewInvoice";
+        const url = process.env.REACT_APP_API_URL + "/Invoice/NewInvoice";
 
         await axios.post(url, invoiceBody, {withCredentials: true})
             .then((res) => {

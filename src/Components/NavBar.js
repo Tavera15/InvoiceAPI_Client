@@ -18,7 +18,7 @@ function NavBar()
     {
         e.preventDefault();
 
-        const url = "https://localhost:44383/api/Account/Logout"
+        const url = process.env.REACT_APP_API_URL + "/Account/Logout"
         await axios.post(url,{},{withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
@@ -54,7 +54,6 @@ function NavBar()
                         : <div></div>
                     }
 
-                    
                     </ul>
                     <span className="navbar-text">
                         <ul className="navbar-nav mr-auto">

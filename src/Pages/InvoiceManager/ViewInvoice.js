@@ -7,8 +7,6 @@ import "../../Components/Styles/CompanyForms.css";
 import InvoiceMaker from "../../Components/InvoiceMaker";
 import NotFoundPage from "../NotFoundPage";
 
-//https://www.youtube.com/watch?v=497riGWbhsQ
-
 function ViewInvoice()
 {
     const history = useHistory();
@@ -16,6 +14,7 @@ function ViewInvoice()
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
+        documentTitle: "Invoice " + params.id
     });
     
     const [invoiceData, setInvoiceData] = useState({});    
@@ -25,7 +24,7 @@ function ViewInvoice()
     useEffect(() => {
         async function getInvoiceData()
         {
-            const url = "https://localhost:44383/api/Invoice/GetInvoice/" + params.id;            
+            const url = process.env.REACT_APP_API_URL + "/Invoice/GetInvoice/" + params.id;            
 
             await axios.get(url, {withCredentials: true})
                 .then((res) => {
@@ -46,8 +45,7 @@ function ViewInvoice()
     async function saveInvoice(e, invoiceBody)
     {
         e.preventDefault();
-
-        const url = "https://localhost:44383/api/Invoice/UpdateInvoice/" + params.id;
+        const url = process.env.REACT_APP_API_URL + "/Invoice/UpdateInvoice/" + params.id;
 
         await axios.put(url, invoiceBody, {withCredentials: true})
             .then((res) => {
@@ -71,7 +69,7 @@ function ViewInvoice()
     async function deleteInvoice(e)
     {
         e.preventDefault();
-        const url = "https://localhost:44383/api/Invoice/DeleteInvoice/" + params.id;
+        const url = process.env.REACT_APP_API_URL + "/Invoice/DeleteInvoice/" + params.id;
 
         await axios.delete(url, {withCredentials: true})
             .then((res) => {

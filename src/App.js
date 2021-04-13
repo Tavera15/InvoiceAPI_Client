@@ -24,7 +24,7 @@ function App()
   useEffect(() => {
       async function getUserStatus()
       {
-          const url = "https://localhost:44383/api/Account/IsUserLoggedIn";
+          const url = process.env.REACT_APP_API_URL + "/Account/IsUserLoggedIn";
           await axios.get(url, {withCredentials: true})
             .then((res) => {
               if(res.data.email !== "")
@@ -76,7 +76,6 @@ function App()
         </div>
     );
   }
-
 }
 
 export default App;

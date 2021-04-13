@@ -20,7 +20,7 @@ function RegisterPage()
     {
         e.preventDefault();
 
-        const url = "https://localhost:44383/api/Account/Register";
+        const url = process.env.REACT_APP_API_URL + "/Account/Register";
         await axios.post(url, {"email": email, "password": password, "confirmPassword": confirmPassword}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))

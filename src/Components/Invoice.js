@@ -97,9 +97,7 @@ const Invoice = React.forwardRef((props, ref) =>
                                         </table>
                                     </div>
                                 </div>
-                            </div>
-                            
-                                                          
+                            </div>                             
                             <div className="table-responsive">
                                 <table className="table table-striped text-left">
                                     <thead>

@@ -18,7 +18,7 @@ function ViewCompany()
     {
         async function getCompany()
         {
-            const url = "https://localhost:44383/api/Company/GetCompany/" + params.id;
+            const url = process.env.REACT_APP_API_URL + "/Company/GetCompany/" + params.id;
             
             await axios.get(url, {withCredentials: true})
                 .then((res) => {
@@ -39,13 +39,13 @@ function ViewCompany()
     async function saveCompany(e, companyBody)
     {
         e.preventDefault();
-        const url = "https://localhost:44383/api/Company/UpdateCompany/" + params.id;
+        const url = process.env.REACT_APP_API_URL + "/Company/UpdateCompany/" + params.id;
         
         await axios.put(url, companyBody, {withCredentials: true})
             .then((res) => {
                 if(res.status === 200)
                 {
-                    history.push("/InvoiceAPI_Client/Profile/");
+                    history.push("/Profile");
                 }
             })
             .catch((err) => {
@@ -56,7 +56,7 @@ function ViewCompany()
     async function deleteCompany(e)
     {
         e.preventDefault();
-        const url = "https://localhost:44383/api/Company/DeleteCompany/" + params.id;
+        const url = process.env.REACT_APP_API_URL + "/Company/DeleteCompany/" + params.id;
         
         await axios.delete(url, {withCredentials: true})
         .then((res) => {

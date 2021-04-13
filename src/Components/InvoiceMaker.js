@@ -74,10 +74,11 @@ function InvoiceMaker(props)
     useEffect(() => {
         async function getCompanies()
         {
-            const url = "https://localhost:44383/api/Company/GetCompanies";      
-            const res = await axios.get(url, {withCredentials: true});
-
-            setAllCompanies(res.data);
+            const url = process.env.REACT_APP_API_URL + "/Company/GetCompanies";      
+            await axios.get(url, {withCredentials: true})
+                .then((res) => {
+                    setAllCompanies(res.data);
+                })
         }
         
         getCompanies();

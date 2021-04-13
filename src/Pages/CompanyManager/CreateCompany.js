@@ -10,7 +10,7 @@ function CreateCompany()
     async function createNewCompany(e, companyBody)
     {
         e.preventDefault();
-        const url = "https://localhost:44383/api/Company/NewCompany";
+        const url = process.env.REACT_APP_API_URL + "/Company/NewCompany";
         
         await axios.post(url, companyBody, {withCredentials: true})
             .then((res) => {

@@ -19,7 +19,7 @@ function LoginPage()
     {   
         e.preventDefault();
 
-        const url = "https://localhost:44383/api/Account/Login";
+        const url = process.env.REACT_APP_API_URL + "/Account/Login";
         await axios.post(url, {"email": email, "password": password}, {withCredentials: true})
             .then((res) => {
                 dispatch(userAuthentication(res.data))
