@@ -9,6 +9,15 @@ const AuthSlice = createSlice({
     reducers: {
         userAuthentication: (state, action) =>
         {
+            if(action.payload.token === "")
+            {
+                window.localStorage.removeItem("TaveraInvoiceToken");
+            }
+            else
+            {
+                window.localStorage.setItem("TaveraInvoiceToken", action.payload.token);
+            }
+
             return{
                 ...state, ...{
                     userEmail: action.payload.email,

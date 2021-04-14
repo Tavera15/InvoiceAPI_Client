@@ -18,9 +18,11 @@ function ViewCompany()
     {
         async function getCompany()
         {
+            const token = window.localStorage.getItem("TaveraInvoiceToken");
+            const config = {headers: { Authorization: `Bearer ${token}` }}
+
             const url = process.env.REACT_APP_API_URL + "/Company/GetCompany/" + params.id;
-            
-            await axios.get(url, {withCredentials: true})
+            await axios.get(url, config)
                 .then((res) => {
                     setTargetCompany(res.data);
                     setStatus(res.status);
@@ -39,9 +41,12 @@ function ViewCompany()
     async function saveCompany(e, companyBody)
     {
         e.preventDefault();
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
+
         const url = process.env.REACT_APP_API_URL + "/Company/UpdateCompany/" + params.id;
         
-        await axios.put(url, companyBody, {withCredentials: true})
+        await axios.put(url, companyBody, config)
             .then((res) => {
                 if(res.status === 200)
                 {
@@ -56,9 +61,11 @@ function ViewCompany()
     async function deleteCompany(e)
     {
         e.preventDefault();
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
+
         const url = process.env.REACT_APP_API_URL + "/Company/DeleteCompany/" + params.id;
-        
-        await axios.delete(url, {withCredentials: true})
+        await axios.delete(url, config)
         .then((res) => {
             if(res.status === 200)
             {

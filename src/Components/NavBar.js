@@ -16,9 +16,11 @@ function NavBar()
     async function handleLogout(e)
     {
         e.preventDefault();
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
 
         const url = process.env.REACT_APP_API_URL + "/Account/Logout"
-        await axios.post(url,{},{withCredentials: true})
+        await axios.post(url,{},config)
             .then((res) => {
                 dispatch(userAuthentication(res.data))
             })

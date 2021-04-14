@@ -10,10 +10,11 @@ function CreateInvoice()
     async function createNewInvoice(e, invoiceBody)
     {
         e.preventDefault();
-
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
+        
         const url = process.env.REACT_APP_API_URL + "/Invoice/NewInvoice";
-
-        await axios.post(url, invoiceBody, {withCredentials: true})
+        await axios.post(url, invoiceBody, config)
             .then((res) => {
                 if(res.status === 201)
                 {

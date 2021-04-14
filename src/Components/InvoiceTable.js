@@ -14,8 +14,11 @@ function InvoiceTable()
     useEffect(() => {
         async function getInvoices()
         {
+            const token = window.localStorage.getItem("TaveraInvoiceToken");
+            const config = {headers: { Authorization: `Bearer ${token}` }}
+
             const url = process.env.REACT_APP_API_URL + "/Invoice/GetInvoices";
-            await axios.get(url, {withCredentials: true})
+            await axios.get(url, config)
             .then((res) => {
                 setAllInvoices(res.data);
             })

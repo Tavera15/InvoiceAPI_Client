@@ -10,9 +10,11 @@ function CreateCompany()
     async function createNewCompany(e, companyBody)
     {
         e.preventDefault();
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
+
         const url = process.env.REACT_APP_API_URL + "/Company/NewCompany";
-        
-        await axios.post(url, companyBody, {withCredentials: true})
+        await axios.post(url, companyBody, config)
             .then((res) => {
                 if(res.status === 201)
                 {

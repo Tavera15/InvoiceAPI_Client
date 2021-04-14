@@ -20,12 +20,15 @@ function App()
 {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
-      async function getUserStatus()
-      {
+    async function getUserStatus()
+    {
+          const token = window.localStorage.getItem("TaveraInvoiceToken");
+          const config = {headers: { Authorization: `Bearer ${token}` }}
+
           const url = process.env.REACT_APP_API_URL + "/Account/IsUserLoggedIn";
-          await axios.get(url, {withCredentials: true})
+          await axios.get(url, config)
             .then((res) => {
               if(res.data.email !== "")
                 dispatch(userAuthentication(res.data))

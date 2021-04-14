@@ -24,9 +24,11 @@ function ViewInvoice()
     useEffect(() => {
         async function getInvoiceData()
         {
-            const url = process.env.REACT_APP_API_URL + "/Invoice/GetInvoice/" + params.id;            
+            const token = window.localStorage.getItem("TaveraInvoiceToken");
+            const config = {headers: { Authorization: `Bearer ${token}` }}
 
-            await axios.get(url, {withCredentials: true})
+            const url = process.env.REACT_APP_API_URL + "/Invoice/GetInvoice/" + params.id;            
+            await axios.get(url, config)
                 .then((res) => {
                     setInvoiceData(res.data);
                     setLoadStatus(res.status);
@@ -45,9 +47,11 @@ function ViewInvoice()
     async function saveInvoice(e, invoiceBody)
     {
         e.preventDefault();
-        const url = process.env.REACT_APP_API_URL + "/Invoice/UpdateInvoice/" + params.id;
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
 
-        await axios.put(url, invoiceBody, {withCredentials: true})
+        const url = process.env.REACT_APP_API_URL + "/Invoice/UpdateInvoice/" + params.id;
+        await axios.put(url, invoiceBody, config)
             .then((res) => {
                 if(res.status === 200)
                 {
@@ -69,9 +73,11 @@ function ViewInvoice()
     async function deleteInvoice(e)
     {
         e.preventDefault();
-        const url = process.env.REACT_APP_API_URL + "/Invoice/DeleteInvoice/" + params.id;
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
 
-        await axios.delete(url, {withCredentials: true})
+        const url = process.env.REACT_APP_API_URL + "/Invoice/DeleteInvoice/" + params.id;
+        await axios.delete(url, config)
             .then((res) => {
                 if(res.status === 200)
                 {

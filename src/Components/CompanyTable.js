@@ -13,8 +13,11 @@ function CompanyTable()
     useEffect(() => {
         async function getCompanies()
         {
+            const token = window.localStorage.getItem("TaveraInvoiceToken");
+            const config = {headers: { Authorization: `Bearer ${token}` }}
+
             const url = process.env.REACT_APP_API_URL + "/Company/GetCompanies";
-            await axios.get(url, {withCredentials: true})
+            await axios.get(url, config)
             .then((res) => {
                 setAllCompanies(res.data);
             })
