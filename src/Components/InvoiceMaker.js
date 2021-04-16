@@ -111,7 +111,7 @@ function InvoiceMaker(props)
             setTaxAmount(newTaxAmount);
 
             // Grand Total
-            let newGrandTotal = Math.ceil((subtotal + taxAmount) * 100) / 100;
+            let newGrandTotal = ((subtotal + taxAmount) * 100) / 100;
             setGrandTotal(newGrandTotal);
         }
 
@@ -354,11 +354,11 @@ function InvoiceMaker(props)
                         <div className="form-row">
                             <div className="form-group col-md-8">
                                 <label>Unit Price</label>
-                                <input required type="number" className="form-control" id="inputProductUnitPrice" />
+                                <input required type="number" step="0.01" className="form-control" id="inputProductUnitPrice" />
                             </div>
                             <div className="form-group col-md-4">
                                 <label>Quantity</label>
-                                <input required type="number" defaultValue={1} className="form-control" min="1" id="inputProductQuantity" />
+                                <input required type="number" step="1" defaultValue={1} className="form-control" min="1" id="inputProductQuantity" />
                             </div>
                         </div>
                         <Button type="submit">Add New</Button>
@@ -404,7 +404,7 @@ function InvoiceMaker(props)
                             </tr>
                             <tr>
                                 <td className="left">
-                                    <strong>Tax Rate <input className="tax-rate-input" onChange={(e) => setTaxRate(e.target.value)} value={taxRate || 0} type="number" min="0" id="inputTaxRate" /> %</strong>
+                                    <strong>Tax Rate <input className="tax-rate-input" onChange={(e) => setTaxRate(e.target.value)} value={taxRate || 0} type="number" step="0.01" min="0" id="inputTaxRate" /> %</strong>
                                 </td>
                                 <td className="right">${taxAmount.toFixed(2)}</td>
                             </tr>
