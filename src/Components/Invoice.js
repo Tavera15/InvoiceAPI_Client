@@ -9,7 +9,7 @@ const Invoice = React.forwardRef((props, ref) =>
                 <div>
                     <div className="card">
                         <div className="card-header text-center">Invoice:
-                            <strong> #{props.data.id}</strong>
+                            <strong> #{props.data.invoiceNumber}</strong>
                         </div>
                         <div className="card-body">
 
@@ -88,7 +88,7 @@ const Invoice = React.forwardRef((props, ref) =>
                                                 <tr className="text-left">
                                                     <td>
                                                         <div>Invoice:
-                                                            <strong> #{props.data.id}</strong>
+                                                            <strong> #{props.data.invoiceNumber}</strong>
                                                         </div>
                                                         <div>Date Created: {props.data.date}</div>
                                                     </td>

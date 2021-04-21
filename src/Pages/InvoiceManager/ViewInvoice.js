@@ -9,17 +9,18 @@ import NotFoundPage from "../NotFoundPage";
 
 function ViewInvoice()
 {
+    const [invoiceData, setInvoiceData] = useState({});    
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [loadStatus, setLoadStatus] = useState();
+    
     const history = useHistory();
     const params = useParams();
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
-        documentTitle: "Invoice " + params.id
+        documentTitle: "Invoice " + invoiceData.invoiceNumber
     });
     
-    const [invoiceData, setInvoiceData] = useState({});    
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [loadStatus, setLoadStatus] = useState();
 
     useEffect(() => {
         async function getInvoiceData()
