@@ -116,7 +116,7 @@ function ViewInvoice()
                     }
                 </div>
 
-                : <div>Loading...</div>
+                : <div style={{"color": "white"}}>Loading...</div>
             }
         </div>
     );

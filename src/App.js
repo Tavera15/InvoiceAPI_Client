@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import { userAuthentication } from './App/AuthSlicer';
 import PrivateRoute from "./Components/PrivateRoute";
 import HomePage from "./Pages/HomePage";
-import NotFoundPage from "./Pages/NotFoundPage";
 
 function App() 
 {
@@ -41,44 +40,41 @@ function App()
       getUserStatus();
   }, [dispatch])
 
-  if(isLoading)
-  {
-    return <div>Loading...</div>
-  }
-  else
-  {
-    return (
-        <div className="App">
-          <Router>
-            <NavBar />
-            <Switch>
-                <Route exact path="/">
-                  <HomePage />
-                </Route>
 
-                <Route exact path="/Login">
-                  <LoginPage />
-                </Route>
+  return (
+      <div className="App">
+        <Router>
+          <NavBar />
+          <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
 
-                <Route exact path="/Register">
-                  <RegisterPage />
-                </Route>
+              <Route exact path="/Login">
+                <LoginPage />
+              </Route>
 
-                <PrivateRoute Comp={<ProfilePage />} path="/Profile"/>
+              <Route exact path="/Register">
+                <RegisterPage />
+              </Route>
+            
+          </Switch>
+              {
+                isLoading
+                ? <div style={{"color": "white"}}>Loading...</div>
+                : <Switch>
+                        <PrivateRoute Comp={<ProfilePage />} path="/Profile"/>
 
-                <PrivateRoute Comp={<CreateCompany />} path="/CompanyManager/NewCompany"/>
-                <PrivateRoute Comp={<ViewCompany />} path="/CompanyManager/ViewCompany/:id"/>
+                        <PrivateRoute Comp={<CreateCompany />} path="/CompanyManager/NewCompany"/>
+                        <PrivateRoute Comp={<ViewCompany />} path="/CompanyManager/ViewCompany/:id"/>
 
-                <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
-                <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
-
-                <Route path='*' exact={true} component={NotFoundPage} />
-
-            </Switch>
-          </Router>
-        </div>
-    );
-  }
+                        <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
+                        <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
+                  </Switch>
+              }
+        </Router>
+      </div>
+  );
 }
 
 export default App;

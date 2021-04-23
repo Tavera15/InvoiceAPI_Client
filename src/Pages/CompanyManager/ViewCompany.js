@@ -86,7 +86,7 @@ function ViewCompany()
                         : <NotFoundPage />
                     }
                 </div>
-            : <div>Loading...</div>}
+            : <div style={{"color": "white"}}>Loading...</div>}
         </div>
     );
 }
