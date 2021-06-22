@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import InvoiceMaker from '../../Components/InvoiceMaker';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 function CreateInvoice()
 {

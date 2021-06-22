@@ -248,7 +248,7 @@ function InvoiceMaker(props)
                                         <option hidden defaultValue>Select Company</option>
                                         {allCompanies.map((c, i) => 
                                             <option key={i} value={c.id}>{c.companyName}</option>
-                                            )}
+                                        )}
                                     </select>
                                 </div>
                             : <div></div>
@@ -340,9 +340,7 @@ function InvoiceMaker(props)
                                     menubar: true,
                                     height: 200,
                                     plugins: [
-                                        'advlist autolink lists link charmap print preview anchor',
-                                        'searchreplace visualblocks code fullscreen',
-                                        'insertdatetime media table paste code help wordcount'
+                                        'table'
                                     ],
                                     toolbar: 'undo redo | formatselect | ' +
                                     'bold italic backcolor | alignleft aligncenter ' +
@@ -432,14 +430,12 @@ function InvoiceMaker(props)
                             menubar: true,
                             height: 200,
                             plugins: [
-                                'advlist autolink lists link charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                            ],
-                            toolbar: 'undo redo | formatselect | ' +
-                            'bold italic backcolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | help',
+                                'table'
+                              ],
+                              toolbar: 'undo redo | formatselect | ' +
+                              'bold italic backcolor | alignleft aligncenter ' +
+                              'alignright alignjustify | bullist numlist outdent indent | ' +
+                              'removeformat | help',
                         }}
                         />
                 </div>

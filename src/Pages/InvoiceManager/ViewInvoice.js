@@ -58,12 +58,12 @@ function ViewInvoice()
                 {
                     if(!res.data.isFinalized)
                     {
-                        history.push("/Profile")
-                        return;
+                        history.push("/Profile");
                     }
-
-                    setInvoiceData(res.data);
-                    setLoadStatus(res.status)
+                    else
+                    {
+                        window.location.reload();
+                    }
                 }
             })
             .catch((err) => {
