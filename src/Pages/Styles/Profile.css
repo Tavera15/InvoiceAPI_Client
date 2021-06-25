@@ -1,5 +1,7 @@
 .base-page{
-    margin: 5% 0;
+    margin: 0;
+    min-height: 92.5vh;
+    background-color: rgba(20,20,20, .55);
 }
 
 .center-block{
@@ -11,17 +13,11 @@
     margin: 20px 0 0;
 }
 
-.dist-block{
-    background-color: rgba(65,65,65,.95);
-    border-radius: 10px;
-}
-
 .create-new-btn{
     margin: 30px 0;
     text-align: right;
 }
 
 .dark-box-shadow{
-    box-shadow: 10px 10px 5px black;
     border-radius: 10px;
 }

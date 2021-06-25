@@ -17,6 +17,7 @@ import "./Styles/CompanyForms.css";
 function InvoiceMaker(props)
 {
     const [allCompanies, setAllCompanies] = useState([]);
+    const [allCustomers, setAllCustomers] = useState([]);
     
     const [companyName, setCompanyName] = useState("");
     const [companyEmail, setCompanyEmail] = useState("");
@@ -72,19 +73,29 @@ function InvoiceMaker(props)
     }, [props.defaultInvoiceVals])
 
     useEffect(() => {
+        const token = window.localStorage.getItem("TaveraInvoiceToken");
+        const config = {headers: { Authorization: `Bearer ${token}` }}
+        
         async function getCompanies()
         {
-            const token = window.localStorage.getItem("TaveraInvoiceToken");
-            const config = {headers: { Authorization: `Bearer ${token}` }}
-
             const url = process.env.REACT_APP_API_URL + "/Company/GetCompanies";      
             await axios.get(url, config)
                 .then((res) => {
                     setAllCompanies(res.data);
                 })
         }
+
+        async function getCustomers()
+        {
+            const url = process.env.REACT_APP_API_URL + "/Customer/GetCustomers";
+            await axios.get(url, config)
+                .then((res) => {
+                    setAllCustomers(res.data);
+                })
+        }
         
         getCompanies();
+        getCustomers();
     }, []);
 
     useEffect(() => {
@@ -119,7 +130,7 @@ function InvoiceMaker(props)
 
     }, [taxRate, productsList, subtotal, taxAmount])
 
-    function handleSelect(e)
+    function handleSelectCompany(e)
     {
         const id = e.target.value;
         const choice = allCompanies.find(c => c.id === id);
@@ -135,6 +146,22 @@ function InvoiceMaker(props)
             setCompanyEmail(choice.emailAddress);
             setCompanyPhone(choice.phoneNumber);
             setLogo(choice.companyLogo);
+        }
+    }
+
+    function handleSelectCustomer(e)
+    {
+        const id = e.target.value;
+        const choice = allCustomers.find(c => c.id === id);
+
+        if(choice !== undefined)
+        {
+            setCustomerName(choice.companyName);
+            setCustomerAdd1(choice.addressLine1);
+            setCustomerAdd2(choice.addressLine2);
+            setCustomerCity(choice.city);
+            setCustomerState(choice.state);
+            setCustomerZip(choice.zipCode);
         }
     }
 
@@ -244,7 +271,7 @@ function InvoiceMaker(props)
                         {
                             allCompanies.length > 0 
                             ?   <div className="col-12 select-block">
-                                    <select onChange={(e) => handleSelect(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
+                                    <select onChange={(e) => handleSelectCompany(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
                                         <option hidden defaultValue>Select Company</option>
                                         {allCompanies.map((c, i) => 
                                             <option key={i} value={c.id}>{c.companyName}</option>
@@ -292,6 +319,18 @@ function InvoiceMaker(props)
                         </div>
 
                         <hr />
+                        {
+                            allCustomers.length > 0 
+                            ?   <div className="col-12 select-block">
+                                    <select onChange={(e) => handleSelectCustomer(e)} className="form-select col-sm-4 col-xs-12 btn btn-dark" aria-label="Default select example">
+                                        <option hidden defaultValue>Select Customer</option>
+                                        {allCustomers.map((c, i) => 
+                                            <option key={i} value={c.id}>{c.addressLine1}</option>
+                                        )}
+                                    </select>
+                                </div>
+                            : <div></div>
+                        }
                         <h3 className="form-name">Customer Details</h3>
 
                         <div className="form-group">

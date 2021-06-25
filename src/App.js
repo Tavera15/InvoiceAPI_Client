@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { userAuthentication } from './App/AuthSlicer';
 import PrivateRoute from "./Components/PrivateRoute";
 import HomePage from "./Pages/HomePage";
+import CreateCustomer from "./Pages/CustomerManager/CreateCustomer";
+import ViewCustomer from "./Pages/CustomerManager/ViewCustomer";
 
 function App() 
 {
@@ -70,6 +72,9 @@ function App()
 
                         <PrivateRoute Comp={<CreateInvoice />} path="/InvoiceManager/NewInvoice"/>
                         <PrivateRoute Comp={<ViewInvoice />} path="/InvoiceManager/ViewInvoice/:id"/>
+
+                        <PrivateRoute Comp={<CreateCustomer />} path="/CustomerManager/NewCustomer"/>
+                        <PrivateRoute Comp={<ViewCustomer />} path="/CustomerManager/ViewCustomer/:id"/>
                   </Switch>
               }
         </Router>

@@ -37,7 +37,8 @@ function InvoiceTable()
                 .filter((c) => 
                     c.id.includes(invoiceInputText)
                     || c.companyName.toLowerCase().includes(invoiceInputText.toLowerCase())
-                    || c.customerName.toLowerCase().includes(invoiceInputText.toLowerCase()))
+                    || c.customerName.toLowerCase().includes(invoiceInputText.toLowerCase())
+                    || c.invoiceNumber.toString().includes(invoiceInputText))
             : allInvoices;
 
         let res = [];
@@ -59,6 +60,15 @@ function InvoiceTable()
     }, [invoiceInputText, allInvoices, invoiceType])
 
     const columns = [
+        {
+            dataField: 'invoiceNumber',
+            text: 'Invoice Number',
+            style:{borderBottom: "1px black solid"},
+            classes: (row, rowContent) => {
+                return (rowContent.isFinalized ? "table-success text-dark align-middle" : "table-warning text-dark align-middle")
+            },
+            formatter: (row, rowContent) => rowContent.invoiceNumber
+        },
         {
             dataField: 'companyName',
             text: 'Company Name',
